@@ -1,7 +1,7 @@
 import mosca from '../images/mosca.png';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { LogoStyle } from '../stylesheet/models';
+import { ContentStyle, LogoStyle } from '../stylesheet/models';
 import { Oval } from 'react-loader-spinner';
 import { useNavigate, Link } from 'react-router-dom';
 import { postSignIn } from '../services/MoscaAtacadista';
@@ -89,15 +89,11 @@ function SignIn () {
 
 export { SignIn };
 
-const Content = styled.div`
-    width: 100vw;
-    height: 100vh;
+const Content = styled(ContentStyle)`
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: linear-gradient(to top, #AEA972, #6A8E7F );
-
     a {
         text-decoration: none;
         color: white;

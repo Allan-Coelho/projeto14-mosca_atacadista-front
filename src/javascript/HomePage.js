@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ContentBoxStyle, LogoStyle, SelectionStyle } from "../stylesheet/models";
+import { CarouselStyle, ContentStyle, LogoStyle, MenuStyle, SelectionStyle } from "../stylesheet/models";
 import mosca from '../images/mosca.png';
 import { useNavigate, Link } from "react-router-dom";
 
@@ -39,8 +39,15 @@ function HomePage () {
                         <ion-icon name="person"></ion-icon>
                     </Link>
                 </div>
-                
             </Menu>
+
+            <Carousel>
+                <div className="item">1</div>
+                <div className="item">2</div>
+                <div className="item">3</div>
+                <div className="item">4</div>
+                <div className="item">5</div>
+            </Carousel>
            
         </Content>
     );
@@ -48,21 +55,10 @@ function HomePage () {
 
 export { HomePage };
 
-const Content = styled.div`
-    width: 100vw;
-    height: 100vh;
+const Content = styled(ContentStyle)`
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
-    background: linear-gradient(to top, #AEA972, #6A8E7F );
-
-    h1 {
-        text-decoration: none;
-        color: white;
-        text-align: center;
-        width: 30%;
-    }
 `;
 
 const Logo = styled(LogoStyle)`
@@ -71,26 +67,10 @@ const Logo = styled(LogoStyle)`
     width: 120px;
 `;
 
-const Menu = styled.div`
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 110px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    div {
-        margin-right: 20px;
-    }
-
-    ion-icon  {
-        margin-right: 10px;
-        font-size: 32px;
-        color: #3d5248;
-    }
-`;
+const Menu = styled(MenuStyle)``;
 
 const Selection = styled(SelectionStyle)``;
 
-const ContentBox = styled(ContentBoxStyle)``;
+const Carousel = styled(CarouselStyle)`
+    margin-top: 90px;
+`;

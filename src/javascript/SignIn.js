@@ -34,19 +34,21 @@ function SignIn () {
         }
 
         validEntries ? (
-            postSignIn(form).then(setIsAble(false))
+            navigate('/homepage')
+            /* postSignIn(form).then(setIsAble(false))
             .catch(function () {
                 alert('Ocorreu um erro no login, tente novamente!');
                 setIsAble(true);
             }).then(function (response) {
                 if (response) {
+                    console.log(response.data)
                     localStorage.clear();
-                    localStorage.setItem( 'auth', JSON.stringify({ authorization: response.data.token, name: response.data.name}));
-                    navigate('/homepage');
+                    localStorage.setItem( 'auth', JSON.stringify({ authorization: response.data.token}));
+                    
                 }
             }).finally(function(){
                 setIsAble(true);
-            })
+            }) */
         ) : <></>;
 
         event.preventDefault();
@@ -107,6 +109,17 @@ const Content = styled.div`
 
 const Logo = styled(LogoStyle)`
     font-family: 'Lobster';
+    left: 40px;
+
+    img {
+        height: 100px;
+        top: -20px;
+        left: -110px;
+    }
+    
+    h1 {
+        font-size: 40px;
+    }
 `;
 
 const Form = styled.div`

@@ -1,10 +1,13 @@
 import styled from "styled-components";
-import { CarouselStyle, ContentStyle, LogoStyle, MenuStyle, SelectionStyle } from "../stylesheet/models";
+import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle } from "../stylesheet/models";
 import mosca from '../images/mosca.png';
 import { useNavigate, Link } from "react-router-dom";
+import EmblaCarousel from "./EmblaCarousel";
 
 function HomePage () {
     const navigate = useNavigate();
+    const SLIDE_COUNT = 6;
+    const slides = Array.from(Array(SLIDE_COUNT).keys());
 
     const selectCategory = (event) => {
         const category = event.target.value;
@@ -41,14 +44,8 @@ function HomePage () {
                 </div>
             </Menu>
 
-            <Carousel>
-                <div className="item">1</div>
-                <div className="item">2</div>
-                <div className="item">3</div>
-                <div className="item">4</div>
-                <div className="item">5</div>
-            </Carousel>
-           
+            <EmblaCarousel slides={slides} />
+        
         </Content>
     );
 }
@@ -59,6 +56,11 @@ const Content = styled(ContentStyle)`
     display: flex;
     align-items: center;
     flex-direction: column;
+
+    .embla {
+        margin-top: 140px;
+        width: 80%
+    }
 `;
 
 const Logo = styled(LogoStyle)`
@@ -71,6 +73,12 @@ const Menu = styled(MenuStyle)``;
 
 const Selection = styled(SelectionStyle)``;
 
-const Carousel = styled(CarouselStyle)`
-    margin-top: 90px;
+const CarouselPosition = styled.div`
+    margin-top: 100px;
+
+    span {
+        background-color: white;
+        width: 300px;
+        height: 300px;
+    }
 `;

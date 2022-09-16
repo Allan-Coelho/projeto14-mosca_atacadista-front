@@ -56,7 +56,7 @@
     min-width: 100%;
     max-width: none;
     transform: translate(-50%, -50%);
-    
+    z-index: -1;
   }
   
   .embla__button {
@@ -65,7 +65,7 @@
     background-color: transparent;
     touch-action: manipulation;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     top: 50%;
     transform: translateY(-50%);
     border: 0;
@@ -94,4 +94,21 @@
   .embla__button--next {
     right: 27px;
   }
-  
+
+  .embla__slide__inner :nth-child(2) {
+    display: flex;
+    position: absolute;
+    bottom: -14px;
+    right: -10px;
+    font-family: 'Lobster';
+    overflow: hidden;
+    padding: 12px;
+    font-size: 48px;
+    color: white;
+    background-color: #d45c3e;
+    border-radius: 50%;
+    text-shadow: 2px 2px 4px black;
+    transform: rotate(-15deg);
+    height: 60px;
+    width: 90px;
+  }

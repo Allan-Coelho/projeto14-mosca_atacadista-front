@@ -2,9 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import { PrevButton, NextButton } from "./EmblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
 import { mediaByIndex } from "../media/indexMedia";
+import { useNavigate } from "react-router-dom";
 import "../css/Embla.css";
 
 const EmblaCarousel = ({ slides }) => {
+  const navigate = useNavigate();
   const [viewportRef, embla] = useEmblaCarousel({
     slidesToScroll: 2,
     skipSnaps: false
@@ -32,12 +34,13 @@ const EmblaCarousel = ({ slides }) => {
         <div className="embla__container">
           {slides.map((index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__slide__inner">
+              <div className="embla__slide__inner" onClick={() => navigate('/product/?productId='+mediaByIndex(index)[2])}>
                 <img
                   className="embla__slide__img"
-                  src={mediaByIndex(index)}
+                  src={mediaByIndex(index)[0]}
                   alt=""
                 />
+                <div className="promotion">{mediaByIndex(index)[1]+'%'}</div>
               </div>
             </div>
           ))}

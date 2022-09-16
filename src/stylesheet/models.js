@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const LogoStyle = styled.div`
     position: relative;
+    font-family: 'Lobster';
 
     img {
         position: absolute;
@@ -65,14 +66,15 @@ const MenuStyle =  styled.div`
     position: fixed;
     top: 0;
     width: 100%;
-    height: 90px;
+    height: 95px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(to top, #75927D, #6A8E7F );
-    -moz-box-shadow: 0 20px 20px #75927D;
-    -webkit-box-shadow: 0 20px 20px #75927D;
-    box-shadow: 0 20px 20px #75927D;
+    -moz-box-shadow: 0 10px 10px #75927D;
+    -webkit-box-shadow: 0 10px 10px #75927D;
+    box-shadow: 0 10px 10px #75927D;
+    z-index: 4;
 
     div {
         margin-right: 20px;

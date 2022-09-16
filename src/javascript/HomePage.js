@@ -3,6 +3,10 @@ import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle } from "../styleshee
 import mosca from '../images/mosca.png';
 import { useNavigate, Link } from "react-router-dom";
 import EmblaCarousel from "./EmblaCarousel";
+import media1 from "../media/media1.jpg";
+import media2 from "../media/media2.jpeg";
+import media3 from "../media/media3.jpeg";
+import media4 from "../media/media4.jpeg";
 
 function HomePage () {
     const navigate = useNavigate();
@@ -45,6 +49,39 @@ function HomePage () {
             </Menu>
 
             <EmblaCarousel slides={slides} />
+                
+            <Selling>
+                    <Link to='/products/?productId=1'>
+                        <img src={media1}/>
+                        <h2>Nome</h2>
+                        <h3>Valor</h3>
+                    </Link>
+                    <Link to='/products/?productId=1'>
+                        <img src={media2}/>
+                        <h2>Nome</h2>
+                        <h3>Valor</h3>
+                    </Link>
+                    <Link to='/products/?productId=1'>
+                        <img src={media3}/>
+                        <h2>Nome</h2>
+                        <h3>Valor</h3>
+                    </Link>
+                    <Link to='/products/?productId=1'>
+                        <img src={media4}/>
+                        <h2>Nome</h2>
+                        <h3>Valor</h3>
+                    </Link>
+                    <Link to='/products/?productId=1'>
+                        <img src={media3}/>
+                        <h2>Nome</h2>
+                        <h3>Valor</h3>
+                    </Link>
+                    <Link to='/products/?productId=1'>
+                        <img src={media4}/>
+                        <h2>Nome</h2>
+                        <h3>Valor</h3>
+                    </Link>
+            </Selling>
         
         </Content>
     );
@@ -58,13 +95,12 @@ const Content = styled(ContentStyle)`
     flex-direction: column;
 
     .embla {
-        margin-top: 140px;
+        margin-top: 120px;
         width: 80%
     }
 `;
 
 const Logo = styled(LogoStyle)`
-    font-family: 'Lobster';
     left: 100px;
     width: 120px;
 `;
@@ -73,12 +109,41 @@ const Menu = styled(MenuStyle)``;
 
 const Selection = styled(SelectionStyle)``;
 
-const CarouselPosition = styled.div`
-    margin-top: 100px;
+const Selling = styled.div`
+    display: table;
+    margin-top: 20px;
 
-    span {
+    a {
+        float: left;
+        text-decoration: none;
         background-color: white;
-        width: 300px;
-        height: 300px;
+        max-width: 42.5%;
+        width: 42.5%;
+        height: 210px;
+        box-sizing: border-box;
+        margin-top: 20px;
+        border-radius: 15px;
+        font-family: 'Raleway';
+        color: black;
+        margin-left: 5%;
+        position: relative;
+
+        img {
+            border-radius: 15px 15px 0 0;
+            width: 100%;
+            height: 70%;
+        }
+
+        h2 {
+            margin-left: 10px;
+        }
+
+        h3 {
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+            text-align: right;
+        }
     }
+
 `;

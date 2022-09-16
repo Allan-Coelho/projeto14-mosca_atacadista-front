@@ -1,29 +1,11 @@
 import mosca from '../images/mosca.png';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { LogoStyle } from '../stylesheet/models';
+import { ContentStyle, LogoStyle } from '../stylesheet/models';
 import { Oval } from 'react-loader-spinner';
-import {  useNavigate, Link } from 'react-router-dom';
-import joi from 'joi';
-import { joiPasswordExtendCore } from 'joi-password';
+import { useNavigate, Link } from 'react-router-dom';
 import { postSignIn } from '../services/MoscaAtacadista';
-
-const joiPassword = joi.extend(joiPasswordExtendCore);
-
-const schemaLogin = joi.object({
-    email: joi.string()
-        .email({tlds: { allow: false }})
-        .required(),
-
-    password: joiPassword
-        .string()
-        .minOfSpecialCharacters(1)
-        .minOfLowercase(1)
-        .minOfUppercase(1)
-        .minOfNumeric(1)
-        .noWhiteSpaces()
-        .required()
-})
+import { signInSchema } from '../Schemas/signInSchema';
 
 function SignIn () {
     const navigate = useNavigate();
@@ -42,7 +24,7 @@ function SignIn () {
     }
     
     const makeSignIn = (event) => {
-        const validation = schemaLogin.validate(form, { abortEarly: false });
+        const validation = signInSchema.validate(form, { abortEarly: false });
         
         if (validation.error) {
             alert(validation.error.message);
@@ -52,19 +34,21 @@ function SignIn () {
         }
 
         validEntries ? (
-            postSignIn(form).then(setIsAble(false))
+            navigate('/homepage')
+            /* postSignIn(form).then(setIsAble(false))
             .catch(function () {
                 alert('Ocorreu um erro no login, tente novamente!');
                 setIsAble(true);
             }).then(function (response) {
                 if (response) {
+                    console.log(response.data)
                     localStorage.clear();
-                    localStorage.setItem( 'auth', JSON.stringify({ authorization: response.data.token, name: response.data.name}));
-                    navigate('/homepage');
+                    localStorage.setItem( 'auth', JSON.stringify({ authorization: response.data.token}));
+                    
                 }
             }).finally(function(){
                 setIsAble(true);
-            })
+            }) */
         ) : <></>;
 
         event.preventDefault();
@@ -81,7 +65,7 @@ function SignIn () {
 
                 <Form>
                     <form onSubmit={makeSignIn}>
-                        <input type="email" name='email' value={form.email} onChange={handleForm} placeholder='E-mail' disabled={!isAble ? true : false} />
+                        <input type="text" name='email' value={form.email} onChange={handleForm} placeholder='E-mail' disabled={!isAble ? true : false} />
                         <input type="password" name='password' value={form.password} onChange={handleForm} placeholder='Senha' disabled={!isAble ? true : false} />
                         <button type="submit">
                             {isAble ? 'Entrar' : <Oval 
@@ -105,15 +89,11 @@ function SignIn () {
 
 export { SignIn };
 
-const Content = styled.div`
-    width: 100vw;
-    height: 100vh;
+const Content = styled(ContentStyle)`
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: linear-gradient(to top, #AEA972, #6A8E7F );
-
     a {
         text-decoration: none;
         color: white;
@@ -125,6 +105,17 @@ const Content = styled.div`
 
 const Logo = styled(LogoStyle)`
     font-family: 'Lobster';
+    left: 40px;
+
+    img {
+        height: 100px;
+        top: -20px;
+        left: -110px;
+    }
+    
+    h1 {
+        font-size: 40px;
+    }
 `;
 
 const Form = styled.div`

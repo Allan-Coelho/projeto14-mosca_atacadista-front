@@ -87,4 +87,44 @@ const MenuStyle =  styled.div`
     }
 `;
 
-export { LogoStyle, SelectionStyle, ContentBoxStyle, ContentStyle, MenuStyle };
+const SellingStyle = styled.div`
+    display: table;
+    margin: 20px;
+    margin-left: 8%;
+
+    a {
+        float: left;
+        text-decoration: none;
+        background-color: white;
+        max-width: 45%;
+        width: 45%;
+        height: 210px;
+        box-sizing: border-box;
+        margin-top: 20px;
+        border-radius: 15px;
+        font-family: 'Raleway';
+        color: black;
+        margin-right: 5%;
+        position: relative;
+
+        img {
+            border-radius: 15px 15px 0 0;
+            width: 100%;
+            height: 70%;
+        }
+
+        h2 {
+            margin-left: 10px;
+        }
+
+        h3 {
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+            text-align: right;
+            color: #d45c3e;
+        }
+    }
+`;
+
+export { LogoStyle, SelectionStyle, ContentBoxStyle, ContentStyle, MenuStyle, SellingStyle };

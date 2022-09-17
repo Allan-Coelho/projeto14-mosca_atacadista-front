@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle } from "../stylesheet/models";
+import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle, SellingStyle } from "../stylesheet/models";
 import mosca from '../images/mosca.png';
 import { useNavigate, Link } from "react-router-dom";
 import EmblaCarousel from "./EmblaCarousel";
-import { getProducts } from "../services/MoscaAtacadista";
+import { getProducts, getProductsInPromotion } from "../services/MoscaAtacadista";
 import { useState, useEffect } from "react";
 
 /* db.products.insertMany( [
@@ -16,27 +16,36 @@ import { useState, useEffect } from "react";
  ] ) */
 
 function HomePage () {
-   
     const navigate = useNavigate();
-    const SLIDE_COUNT = 6;
-    const slides = Array.from(Array(SLIDE_COUNT).keys());
     const auth = JSON.parse(localStorage.getItem('auth'));
     const config = { headers:{'Authorization': 'Bearer '+ auth}};
-    const [ products, setProducts ] = useState([]);
+    let products = [];
+    let promotionProducts = [];
+    let SLIDE_COUNT = 6;
+    let slides = Array.from(Array(SLIDE_COUNT).keys());
+    let media = [[], [], [], [], [], []]
+    let mediaByIndex = index => media[index % media.length];
 
     useEffect(() => {
-        getProducts(config).then()
-            .catch(function () {
-                return <></>;
-            }).then(function (response) {
+        products = getProducts(config).then(
+            function (response) {
                 if (response) {
-                    setProducts(response.data);
+                    return(response.data);
+                }
+            })
+
+        getProductsInPromotion(config.params= { category: 'Promocao'}).then(
+            function (response) {
+                if (response.data) {
+                    promotionProducts = response.data;
+                    console.log(response.data)
+                    promotionProducts.map((promotionProduct) => {
+                        media.push([promotionProduct.url, promotionProduct.promotion, promotionProduct._id]);
+                    })
+                    mediaByIndex = index => media[index % media.length]
                 }
             })
     }, [])
-
-    const media = [['seila', 30, 'index1'], ['seila', 20, 'index2'], ['seila', 50, 'index3'], ['seila', 40, 'index4'], ['seila', 50, 'index5'], ['seila', 10, 'index6']];
-    const mediaByIndex = index => media[index % media.length];
 
     const selectCategory = (event) => {
         const category = event.target.value;
@@ -84,10 +93,10 @@ function HomePage () {
             <Selling>
                     {products ? (products.map((product) => {
                             return (
-                                <Link to='/products/?productId='>
+                                <Link to={'/products/?productId='+product.productId} key={product.productId}>
                                     <img src={product.url}/>
-                                    <h2>Nome</h2>
-                                    <h3>Valor</h3>
+                                    <h2>{product.name}</h2>
+                                    <h3>{product.value}</h3>
                                 </Link>
                             );
                         })) : <></>}
@@ -119,42 +128,4 @@ const Menu = styled(MenuStyle)``;
 
 const Selection = styled(SelectionStyle)``;
 
-const Selling = styled.div`
-    display: table;
-    margin: 20px;
-    margin-left: 8%;
-
-    a {
-        float: left;
-        text-decoration: none;
-        background-color: white;
-        max-width: 45%;
-        width: 45%;
-        height: 210px;
-        box-sizing: border-box;
-        margin-top: 20px;
-        border-radius: 15px;
-        font-family: 'Raleway';
-        color: black;
-        margin-right: 5%;
-        position: relative;
-
-        img {
-            border-radius: 15px 15px 0 0;
-            width: 100%;
-            height: 70%;
-        }
-
-        h2 {
-            margin-left: 10px;
-        }
-
-        h3 {
-            position: absolute;
-            right: 10px;
-            bottom: 5px;
-            text-align: right;
-        }
-    }
-
-`;
+const Selling = styled(SellingStyle)``;

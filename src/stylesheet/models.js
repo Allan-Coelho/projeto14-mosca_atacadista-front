@@ -133,6 +133,70 @@ const SellingStyle = styled.div`
     }
 `;
 
+const SellingLongStyle = styled.div`
+    margin-top: 190px;
+    width: 100%;
+
+    
+    & div {
+        background-color: white;
+        width: 90%;
+        height: 200px;
+        border-radius: 15px;
+        margin-left: 5%;
+        
+    }
+    
+    a {
+        text-decoration: none;
+        color: black;
+
+        div {
+            float: left;
+            width: 33.3%;
+            margin: 0;
+            position: relative;
+
+            img {
+                border-radius: 15px 0 0 15px;
+                height: 100%;
+                width: 100%;
+            }
+
+            h2 {
+                margin-left: 10px;
+            }
+
+            h3 {
+                text-align: right;
+                color: #d45c3e;
+            }
+        }
+
+       
+
+        
+    }
+    a :nth-child(3) {
+        width: 10%;
+        display: flex;
+        flex-direction: row;
+
+        & :nth-child(1) {
+            height: 50%;
+            width: 100%;
+        }
+        &  :nth-child(2) {
+            height: 50%;
+            width: 100%;
+        }
+    }
+
+    a :nth-child(2) {
+        width: 56.6%;
+    }
+`;
+
 const  MainInfoStyle = styled.div`
     padding: 5% 10%;
     h2 {
@@ -148,4 +212,4 @@ const  MainInfoStyle = styled.div`
     }
 `;
 
-export { LogoStyle, SelectionStyle, ContentBoxStyle, ContentStyle, MenuStyle, SellingStyle, MainInfoStyle };
+export { LogoStyle, SelectionStyle, ContentBoxStyle, ContentStyle, MenuStyle, SellingStyle, MainInfoStyle, SellingLongStyle };

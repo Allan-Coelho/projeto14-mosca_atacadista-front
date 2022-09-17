@@ -3,6 +3,7 @@ import Reset from "../stylesheet/reset";
 import { SignIn } from "./SignIn";
 import { HomePage } from './HomePage'
 import { Product } from './Product'
+import { Cart } from './Cart'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Route path="/" element={<SignIn/>}/>
             <Route path="/homepage" element={<HomePage/>}/>
             <Route path="/product" element={<Product/>}/>
+            <Route path="/cart" element={<Cart/>}/>
           </Routes>
         </BrowserRouter>
     </>

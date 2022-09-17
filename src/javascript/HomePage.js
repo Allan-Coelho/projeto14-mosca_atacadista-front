@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle } from "../stylesheet/models";
+import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle } from "../stylesheet/models.js";
 import mosca from '../images/mosca.png';
 import { useNavigate, Link } from "react-router-dom";
-import EmblaCarousel from "./EmblaCarousel";
+import EmblaCarousel from "./EmblaCarousel.js";
 import media1 from "../media/media1.jpg";
 import media2 from "../media/media2.jpeg";
 import media3 from "../media/media3.jpeg";

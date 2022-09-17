@@ -19,6 +19,34 @@ const LogoStyle = styled.div`
     }
 `;
 
+const Form = styled.div`
+    margin-top: 20px;
+    font-family: 'Raleway';
+
+    input {
+        padding: 0 3%;
+        margin: 0 0 10px 6%;
+        width: 80%;
+        height: 58px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    button {
+        margin-left: 40%;
+        height: 46px;
+        width: 20%;
+        border: none;
+        border-radius: 5px;
+        background-color: #4e6a5e;
+        color: white;
+    }
+
+    input::placeholder {
+        color: black;
+    }
+`;
+
 const SelectionStyle = styled.div`
     display: flex;
     align-items: center;
@@ -62,7 +90,7 @@ const ContentStyle = styled.div`
     background: linear-gradient(to top, #AEA972, #6A8E7F );
 `;
 
-const MenuStyle =  styled.div`
+const MenuStyle = styled.div`
     position: fixed;
     top: 0;
     width: 100%;

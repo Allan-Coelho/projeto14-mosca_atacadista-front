@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { ContentStyle, LogoStyle } from '../stylesheet/models.js';
 import { Oval } from 'react-loader-spinner';
 import { useNavigate, Link } from 'react-router-dom';
-import { postSignIn } from '../services/services.js';
+import { postSignUp } from '../services/services.js';
 import { signInSchema } from '../Schemas/signInSchema.js';
 
-function SignIn() {
+function SignUp() {
     const navigate = useNavigate();
     const [validEntries, setValidEntries] = useState(false);
     const [isAble, setIsAble] = useState(true);
@@ -23,7 +23,7 @@ function SignIn() {
         })
     }
 
-    const makeSignIn = (event) => {
+    const signUp = (event) => {
         event.preventDefault();
         const validation = signInSchema.validate(form, { abortEarly: false });
 
@@ -63,11 +63,14 @@ function SignIn() {
                 </Logo>
 
                 <Form>
-                    <form onSubmit={makeSignIn}>
-                        <input type="text" name='email' value={form.email} onChange={handleForm} placeholder='E-mail' disabled={!isAble} />
-                        <input type="password" name='password' value={form.password} onChange={handleForm} placeholder='Senha' disabled={!isAble} />
+                    <form onSubmit={signUp}>
+                        <input type="text" name='name' value={form.name} onChange={handleForm} placeholder='Nome' disabled={!isAble ? true : false} />
+                        <input type="text" name='email' value={form.email} onChange={handleForm} placeholder='E-mail' disabled={!isAble ? true : false} />
+                        <input type="password" name='password' value={form.password} onChange={handleForm} placeholder='Senha' disabled={!isAble ? true : false} />
+                        <input type="text" name='profilePictureURL' value={form.profilePictureURL} onChange={handleForm} placeholder='URL da foto de perfil' disabled={!isAble} />
+                        <input type="password" name='password' value={form.confirmPassword} onChange={handleForm} placeholder='Confirme sua senha' disabled={!isAble} />
                         <button type="submit">
-                            {isAble ? 'Entrar' : <Oval
+                            {isAble ? 'Cadastrar' : <Oval
                                 height="20"
                                 width="80"
                                 color='white'
@@ -78,15 +81,15 @@ function SignIn() {
                     </form>
                 </Form>
 
-                <Link to='/signUp'>
-                    Não possui um login? Cadastre-se!
+                <Link to='/'>
+                    Já possui uma conta? Faca login!
                 </Link>
             </Content>
         </>
     );
 };
 
-export { SignIn };
+export { SignUp };
 
 const Content = styled(ContentStyle)`
     display: flex;
@@ -130,6 +133,7 @@ const Form = styled.div`
         height: 58px;
         border: none;
         border-radius: 5px;
+        font-size: 20px
     }
 
     button {

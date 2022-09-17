@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { PrevButton, NextButton } from "./EmblaCarouselButtons";
 import useEmblaCarousel from "embla-carousel-react";
-import { mediaByIndex } from "../media/indexMedia";
 import { useNavigate } from "react-router-dom";
 import "../css/Embla.css";
 
-const EmblaCarousel = ({ slides }) => {
+const EmblaCarousel = (object) => {
+  const slides = object.slides[0];
+  const mediaByIndex = object.slides[1];
   const navigate = useNavigate();
   const [viewportRef, embla] = useEmblaCarousel({
     slidesToScroll: 2,

@@ -3,15 +3,40 @@ import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle } from "../styleshee
 import mosca from '../images/mosca.png';
 import { useNavigate, Link } from "react-router-dom";
 import EmblaCarousel from "./EmblaCarousel";
-import media1 from "../media/media1.jpg";
-import media2 from "../media/media2.jpeg";
-import media3 from "../media/media3.jpeg";
-import media4 from "../media/media4.jpeg";
+import { getProducts } from "../services/MoscaAtacadista";
+import { useState, useEffect } from "react";
+
+/* db.products.insertMany( [
+    { url: "https://cdn.awsli.com.br/600x450/44/44273/produto/29988397/20d63df911.jpg", promotion: 25, productId: 'seila1', category: "Moda" },
+    { url: "https://images.tcdn.com.br/img/img_prod/560775/camiseta_thrasher_magazine_classic_flame_preto_1382_3_8a440574411cd8e597b9529b3a1010f0.jpg", promotion: 50, productId: 'seila2', category: "Moda" },
+    { url: "https://ayine.com.br/wp-content/uploads/2022/03/Miolo-diagonal-O-livro-dos-amigos-site.png", promotion: 100, productId: 'seila3', category: "Livros" },
+    { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvk1JrdTgEob42dWCjxGcnhvAMxu1Elu_zCA&usqp=CAU", promotion: 75, productId: 'seila4', category: "Livros" },
+    { url: "https://cf.shopee.com.br/file/4ceb615fe395053e65c28f42ce54e3fb", promotion: 45, productId: 'seila5', category: "Brinquedos" },
+    { url: "https://cf.shopee.com.br/file/2001056a46f6c1a63a58d3010fd695e6", promotion: 45, productId: 'seila6', category: "Brinquedos" },
+ ] ) */
 
 function HomePage () {
+   
     const navigate = useNavigate();
     const SLIDE_COUNT = 6;
     const slides = Array.from(Array(SLIDE_COUNT).keys());
+    const auth = JSON.parse(localStorage.getItem('auth'));
+    const config = { headers:{'Authorization': 'Bearer '+ auth}};
+    const [ products, setProducts ] = useState([]);
+
+    useEffect(() => {
+        getProducts(config).then()
+            .catch(function () {
+                return <></>;
+            }).then(function (response) {
+                if (response) {
+                    setProducts(response.data);
+                }
+            })
+    }, [])
+
+    const media = [['seila', 30, 'index1'], ['seila', 20, 'index2'], ['seila', 50, 'index3'], ['seila', 40, 'index4'], ['seila', 50, 'index5'], ['seila', 10, 'index6']];
+    const mediaByIndex = index => media[index % media.length];
 
     const selectCategory = (event) => {
         const category = event.target.value;
@@ -31,10 +56,16 @@ function HomePage () {
                     <Selection>
                         <select onChange={selectCategory}>
                             <option value="0" defaultValue hidden>▲</option>
-                            <option value="1">produto1</option>
-                            <option value="2">produto2</option>
-                            <option value="3">produto3</option>
-                            <option value="4">produto4</option>
+                            <option value="1">Eletronicos</option>
+                            <option value="2">Audio e video</option>
+                            <option value="3">Moda</option>
+                            <option value="4">Mercearia</option>
+                            <option value="5">Livros</option>
+                            <option value="6">Instrumentos Musicais</option>
+                            <option value="7">Promoção</option>
+                            <option value="8">Saúde</option>
+                            <option value="9">Decoração</option>
+                            <option value="10">Brinquedos</option>
                         </select>
                     </Selection>
                     
@@ -48,39 +79,18 @@ function HomePage () {
                 </div>
             </Menu>
 
-            <EmblaCarousel slides={slides} />
+            <EmblaCarousel slides={[slides, mediaByIndex]} />
                 
             <Selling>
-                    <Link to='/products/?productId=1'>
-                        <img src={media1}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media2}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media3}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media4}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media3}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media4}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
+                    {products ? (products.map((product) => {
+                            return (
+                                <Link to='/products/?productId='>
+                                    <img src={product.url}/>
+                                    <h2>Nome</h2>
+                                    <h3>Valor</h3>
+                                </Link>
+                            );
+                        })) : <></>}
             </Selling>
         
         </Content>
@@ -96,7 +106,7 @@ const Content = styled(ContentStyle)`
 
     .embla {
         margin-top: 120px;
-        width: 80%
+        width: 100%
     }
 `;
 
@@ -111,21 +121,22 @@ const Selection = styled(SelectionStyle)``;
 
 const Selling = styled.div`
     display: table;
-    margin-top: 20px;
+    margin: 20px;
+    margin-left: 8%;
 
     a {
         float: left;
         text-decoration: none;
         background-color: white;
-        max-width: 42.5%;
-        width: 42.5%;
+        max-width: 45%;
+        width: 45%;
         height: 210px;
         box-sizing: border-box;
         margin-top: 20px;
         border-radius: 15px;
         font-family: 'Raleway';
         color: black;
-        margin-left: 5%;
+        margin-right: 5%;
         position: relative;
 
         img {

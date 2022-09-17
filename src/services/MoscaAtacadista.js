@@ -7,4 +7,9 @@ function postSignIn (body) {
     return promise;
 }
 
-export { postSignIn };
+function getProducts (header) {
+    const promise = axios.get(`${BASE_URL}/products`, header);
+    return promise;
+}
+
+export { postSignIn, getProducts };

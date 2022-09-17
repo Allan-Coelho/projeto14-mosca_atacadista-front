@@ -34,22 +34,22 @@ function SignIn () {
         }
 
         validEntries ? (
-            navigate('/homepage')
-            /* postSignIn(form).then(setIsAble(false))
-            .catch(function () {
-                alert('Ocorreu um erro no login, tente novamente!');
-                setIsAble(true);
-            }).then(function (response) {
-                if (response) {
-                    console.log(response.data)
-                    localStorage.clear();
-                    localStorage.setItem( 'auth', JSON.stringify({ authorization: response.data.token}));
-                    
-                }
-            }).finally(function(){
-                setIsAble(true);
-            }) */
-        ) : <></>;
+            
+            postSignIn(form).then(setIsAble(false))
+                .catch(function () {
+                    alert('Ocorreu um erro no login, tente novamente!');
+                    setIsAble(true);
+                }).then(function (response) {
+                    if (response) {
+                        console.log(response.data)
+                        localStorage.clear();
+                        localStorage.setItem( 'auth', JSON.stringify(response.data));
+                        navigate('/homepage')
+                    }
+                }).finally(function(){
+                    setIsAble(true);
+                })
+            ) : <></>;
 
         event.preventDefault();
     }
@@ -94,6 +94,8 @@ const Content = styled(ContentStyle)`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 100vh;
+
     a {
         text-decoration: none;
         color: white;

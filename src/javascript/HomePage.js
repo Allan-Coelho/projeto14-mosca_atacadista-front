@@ -4,7 +4,7 @@ import mosca from '../images/mosca.png';
 import { useNavigate, Link } from "react-router-dom";
 import EmblaCarousel from "./EmblaCarousel";
 import { getProducts, getProductsInPromotion } from "../services/MoscaAtacadista";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 /* db.products.insertMany( [
     { url: "https://cdn.awsli.com.br/600x450/44/44273/produto/29988397/20d63df911.jpg", promotion: 25, productId: 'seila1', category: "Moda" },
@@ -34,7 +34,7 @@ function HomePage () {
                 }
             })
 
-        getProductsInPromotion(config.params= { category: 'Promocao'}).then(
+        getProductsInPromotion({headers:{'Authorization': 'Bearer '+ auth}, params: { category: 'Promocao'}}).then(
             function (response) {
                 if (response.data) {
                     promotionProducts = response.data;
@@ -65,8 +65,8 @@ function HomePage () {
                     <Selection>
                         <select onChange={selectCategory}>
                             <option value="0" defaultValue hidden>▲</option>
-                            <option value="1">Eletronicos</option>
-                            <option value="2">Audio e video</option>
+                            <option value="1">Eletrônicos</option>
+                            <option value="2">Áudio e video</option>
                             <option value="3">Moda</option>
                             <option value="4">Mercearia</option>
                             <option value="5">Livros</option>

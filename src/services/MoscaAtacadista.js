@@ -13,7 +13,7 @@ function getProducts (header) {
 }
 
 function getProductsInPromotion (header) {
-    const promise = axios.get(`${BASE_URL}/products/category/:category`, header);
+    const promise = axios.get(`${BASE_URL}/products/category/`, header);
     return promise;
 }
 

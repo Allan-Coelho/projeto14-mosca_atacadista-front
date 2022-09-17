@@ -29,23 +29,28 @@ const SelectionStyle = styled.div`
         position: absolute;
         left: -46px;
         bottom: -42px;
-        margin-right: 6px;
         font-size: 38px;
         color: #3d5248;
         appearance: none;
-        text-align: center;
         border: none;
         width: 38px;
         transform: rotate(180deg);
         background-color: transparent;
         height: 38px;
         font-family: 'Raleway';
+        outline: 0;
 
         option {
             font-size: 24px;
             background-color: #6A8E7F;
-            padding: 0;
         }
+    }
+
+    select:part(listbox) {
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid red;
+        border-radius: 5px;
     }
 `;
 

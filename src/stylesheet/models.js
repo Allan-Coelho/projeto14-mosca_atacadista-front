@@ -59,6 +59,7 @@ const ContentBoxStyle = styled.div`
     margin-top: 120px;
     width: 90%;
     border-radius: 25px;
+    margin-bottom: 100px;
 `;
 
 const ContentStyle = styled.div`
@@ -132,4 +133,19 @@ const SellingStyle = styled.div`
     }
 `;
 
-export { LogoStyle, SelectionStyle, ContentBoxStyle, ContentStyle, MenuStyle, SellingStyle };
+const  MainInfoStyle = styled.div`
+    padding: 5% 10%;
+    h2 {
+        font-family: 'Raleway';
+        font-size: 34px;
+    }
+
+    h3 {
+        font-family: 'Raleway';
+        text-align: right;
+        color: #d45c3e;
+        font-size: 24px;
+    }
+`;
+
+export { LogoStyle, SelectionStyle, ContentBoxStyle, ContentStyle, MenuStyle, SellingStyle, MainInfoStyle };

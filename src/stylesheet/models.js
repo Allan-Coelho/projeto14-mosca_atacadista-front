@@ -30,16 +30,20 @@ const Form = styled.div`
         height: 58px;
         border: none;
         border-radius: 5px;
+        font-size: 20px;
     }
 
     button {
         margin-left: 40%;
         height: 46px;
-        width: 20%;
         border: none;
+        padding: 5px;
         border-radius: 5px;
         background-color: #4e6a5e;
         color: white;
+        margin-top: 10px;
+        cursor: pointer;
+        font-size: 20px;
     }
 
     input::placeholder {
@@ -115,4 +119,4 @@ const MenuStyle = styled.div`
     }
 `;
 
-export { LogoStyle, SelectionStyle, ContentBoxStyle, ContentStyle, MenuStyle };
+export { LogoStyle, SelectionStyle, ContentBoxStyle, ContentStyle, MenuStyle, Form };

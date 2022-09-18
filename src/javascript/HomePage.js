@@ -7,22 +7,26 @@ import media1 from "../media/media1.jpg";
 import media2 from "../media/media2.jpeg";
 import media3 from "../media/media3.jpeg";
 import media4 from "../media/media4.jpeg";
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext.js";
+import Authentication from "./modules/authorizationVerifier.js";
 
-function HomePage () {
+function HomePage() {
     const navigate = useNavigate();
     const SLIDE_COUNT = 6;
     const slides = Array.from(Array(SLIDE_COUNT).keys());
-
+    const { user } = useContext(UserContext);
     const selectCategory = (event) => {
         const category = event.target.value;
-        navigate('/products/?category='+category)
+        navigate('/products/?category=' + category)
     }
 
     return (
         <Content>
+            <Authentication />
             <Menu>
                 <Logo>
-                    <img src={mosca} alt=''/>
+                    <img src={mosca} alt='' />
                     <h1>Mosca</h1>
                     <h1>Atacadista</h1>
                 </Logo>
@@ -37,7 +41,7 @@ function HomePage () {
                             <option value="4">produto4</option>
                         </select>
                     </Selection>
-                    
+
                     <Link to='/cart'>
                         <ion-icon name="cart"></ion-icon>
                     </Link>
@@ -49,40 +53,40 @@ function HomePage () {
             </Menu>
 
             <EmblaCarousel slides={slides} />
-                
+
             <Selling>
-                    <Link to='/products/?productId=1'>
-                        <img src={media1}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media2}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media3}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media4}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media3}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
-                    <Link to='/products/?productId=1'>
-                        <img src={media4}/>
-                        <h2>Nome</h2>
-                        <h3>Valor</h3>
-                    </Link>
+                <Link to='/products/?productId=1'>
+                    <img src={media1} />
+                    <h2>Nome</h2>
+                    <h3>Valor</h3>
+                </Link>
+                <Link to='/products/?productId=1'>
+                    <img src={media2} />
+                    <h2>Nome</h2>
+                    <h3>Valor</h3>
+                </Link>
+                <Link to='/products/?productId=1'>
+                    <img src={media3} />
+                    <h2>Nome</h2>
+                    <h3>Valor</h3>
+                </Link>
+                <Link to='/products/?productId=1'>
+                    <img src={media4} />
+                    <h2>Nome</h2>
+                    <h3>Valor</h3>
+                </Link>
+                <Link to='/products/?productId=1'>
+                    <img src={media3} />
+                    <h2>Nome</h2>
+                    <h3>Valor</h3>
+                </Link>
+                <Link to='/products/?productId=1'>
+                    <img src={media4} />
+                    <h2>Nome</h2>
+                    <h3>Valor</h3>
+                </Link>
             </Selling>
-        
+
         </Content>
     );
 }

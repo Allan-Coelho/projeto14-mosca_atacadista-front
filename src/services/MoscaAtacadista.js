@@ -12,8 +12,8 @@ function getProducts (header) {
     return promise;
 }
 
-function getProductsInPromotion (header) {
-    const promise = axios.get(`${BASE_URL}/products/category/`, header);
+function getProductsInPromotion (config) {
+    const promise = axios.get(`${BASE_URL}/products/category/Promocao`, config);
     return promise;
 }
 

@@ -45,13 +45,6 @@ const SelectionStyle = styled.div`
             background-color: #6A8E7F;
         }
     }
-
-    select:part(listbox) {
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid red;
-        border-radius: 5px;
-    }
 `;
 
 const ContentBoxStyle = styled.div`
@@ -105,7 +98,6 @@ const SellingStyle = styled.div`
         max-width: 45%;
         width: 45%;
         height: 210px;
-        box-sizing: border-box;
         margin-top: 20px;
         border-radius: 15px;
         font-family: 'Raleway';
@@ -115,6 +107,7 @@ const SellingStyle = styled.div`
 
         img {
             border-radius: 15px 15px 0 0;
+            object-fit: contain;
             width: 100%;
             height: 70%;
         }

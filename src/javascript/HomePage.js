@@ -4,7 +4,7 @@ import mosca from '../images/mosca.png';
 import { useNavigate, Link } from "react-router-dom";
 import EmblaCarousel from "./EmblaCarousel";
 import { getProducts, getProductsInPromotion } from "../services/MoscaAtacadista";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 /* db.products.insertMany( [
     { url: "https://cdn.awsli.com.br/600x450/44/44273/produto/29988397/20d63df911.jpg", promotion: 25, productId: 'seila1', category: "Moda" },
@@ -19,34 +19,32 @@ function HomePage () {
     const navigate = useNavigate();
     const auth = JSON.parse(localStorage.getItem('auth'));
     const config = { headers:{'Authorization': 'Bearer '+ auth}};
-    let products = [];
-    let promotionProducts = [];
+    const [ products, setProducts ] = useState([]);
     let SLIDE_COUNT = 6;
     let slides = Array.from(Array(SLIDE_COUNT).keys());
-    let media = [[], [], [], [], [], []]
+    const [ media, setMedia ] = useState([[], [], [], [], [], []])
     let mediaByIndex = index => media[index % media.length];
-
+    
     useEffect(() => {
-        products = getProducts(config).then(
+        getProducts(config).then(
             function (response) {
                 if (response) {
-                    return(response.data);
+                    setProducts(response.data);
                 }
             })
-
-        getProductsInPromotion({headers:{'Authorization': 'Bearer '+ auth}, params: { category: 'Promocao'}}).then(
+        getProductsInPromotion({headers:{'Authorization': 'Bearer '+ auth}}).then(
             function (response) {
                 if (response.data) {
-                    promotionProducts = response.data;
-                    console.log(response.data)
-                    promotionProducts.map((promotionProduct) => {
-                        media.push([promotionProduct.url, promotionProduct.promotion, promotionProduct._id]);
+                    let arr = [];
+                    response.data.map((promotionProduct) => {
+                        arr.push([promotionProduct.url, promotionProduct.promotion, promotionProduct._id]);
                     })
-                    mediaByIndex = index => media[index % media.length]
+                    setMedia(arr);
+                    mediaByIndex = index => media[index % media.length];
                 }
             })
-    }, [])
-
+    }, []);
+    
     const selectCategory = (event) => {
         const category = event.target.value;
         navigate('/products/?category='+category)

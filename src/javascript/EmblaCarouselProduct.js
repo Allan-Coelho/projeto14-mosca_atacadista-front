@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { PrevButton, NextButton } from "./EmblaCarouselButtons";
+import { PrevButton, NextButton } from "./EmblaCarouselButtons.js";
 import useEmblaCarousel from "embla-carousel-react";
 import { useNavigate } from "react-router-dom";
 import "../css/Embla.css";

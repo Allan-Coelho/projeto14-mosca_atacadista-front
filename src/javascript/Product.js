@@ -1,8 +1,8 @@
 import mosca from '../images/mosca.png';
 import styled from 'styled-components';
-import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle, ContentBoxStyle, MainInfoStyle } from '../stylesheet/models';
+import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle, ContentBoxStyle, MainInfoStyle } from '../stylesheet/models.js';
 import { useNavigate, Link } from "react-router-dom";
-import EmblaCarousel from "./EmblaCarouselProduct";
+import EmblaCarousel from "./EmblaCarouselProduct.js";
 
 function Product (){
     const navigate = useNavigate();

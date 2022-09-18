@@ -1,6 +1,6 @@
 import mosca from '../images/mosca.png';
 import styled from 'styled-components';
-import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle} from '../stylesheet/models';
+import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle} from '../stylesheet/models.js';
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from 'react';
 

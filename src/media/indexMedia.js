@@ -1,4 +1,4 @@
-import media1 from "./media1.jpg";
+/* import media1 from "./media1.jpeg";
 import media2 from "./media2.jpeg";
 import media3 from "./media3.jpeg";
 import media4 from "./media4.jpeg";
@@ -12,4 +12,4 @@ export const media = [
   [media3, 50, "index5"],
   [media1, 10, "index6"],
 ];
-export const mediaByIndex = (index) => media[index % media.length];
+export const mediaByIndex = (index) => media[index % media.length]; */

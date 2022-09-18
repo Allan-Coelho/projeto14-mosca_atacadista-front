@@ -12,4 +12,14 @@ function postSignUp(body) {
   return promise;
 }
 
-export { postSignIn, postSignUp };
+function getProducts(header) {
+  const promise = axios.get(`${BASE_URL}/products`, header);
+  return promise;
+}
+
+function getProductsInPromotion(config) {
+  const promise = axios.get(`${BASE_URL}/products/category/Promocao`, config);
+  return promise;
+}
+
+export { postSignIn, postSignUp, getProducts, getProductsInPromotion };

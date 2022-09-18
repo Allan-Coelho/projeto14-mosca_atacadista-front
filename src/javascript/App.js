@@ -4,8 +4,10 @@ import { SignIn } from "./SignInPage.js";
 import { HomePage } from "./HomePage.js";
 import { SignUp } from "./SignUpPage.js";
 import UserContext from "../contexts/UserContext.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PrivatePage from "./PrivatePage.js";
+import { Product } from "./Product.js";
+import { Cart } from "./Cart.js";
 
 function App() {
   const [user, setUser] = useState({
@@ -30,6 +32,8 @@ function App() {
                 </PrivatePage>
               }
             />
+            <Route path="/product" element={<Product />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

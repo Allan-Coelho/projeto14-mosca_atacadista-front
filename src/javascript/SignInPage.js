@@ -1,42 +1,43 @@
-import mosca from '../images/mosca.png';
-import styled from 'styled-components';
-import { useState } from 'react';
-import { ContentStyle, LogoStyle } from '../stylesheet/models.js';
-import { Oval } from 'react-loader-spinner';
-import { useNavigate, Link } from 'react-router-dom';
-import { postSignIn } from '../services/services.js';
-import { signInSchema } from '../Schemas/signInSchema.js';
+import mosca from "../images/mosca.png";
+import styled from "styled-components";
+import { useState } from "react";
+import { ContentStyle, LogoStyle } from "../stylesheet/models.js";
+import { Oval } from "react-loader-spinner";
+import { useNavigate, Link } from "react-router-dom";
+import { postSignIn } from "../services/services.js";
+import { signInSchema } from "../Schemas/signInSchema.js";
 
 function SignIn() {
-    const navigate = useNavigate();
-    const [validEntries, setValidEntries] = useState(false);
-    const [isAble, setIsAble] = useState(true);
-    const [form, setForm] = useState({
-        email: '',
-        password: '',
-    });
+  const navigate = useNavigate();
+  const [validEntries, setValidEntries] = useState(false);
+  const [isAble, setIsAble] = useState(true);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-    function handleForm(e) {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        })
+  function handleForm(e) {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const makeSignIn = (event) => {
+    event.preventDefault();
+    const validation = signInSchema.validate(form, { abortEarly: false });
+
+    if (validation.error) {
+      alert(validation.error.message);
+      setValidEntries(false);
+    } else {
+      setValidEntries(true);
     }
 
-    const makeSignIn = (event) => {
-        event.preventDefault();
-        const validation = signInSchema.validate(form, { abortEarly: false });
-
-        if (validation.error) {
-            alert(validation.error.message);
-            setValidEntries(false);
-        } else {
-            setValidEntries(true);
-        }
-
-        validEntries ? (
-            navigate('/homepage')
-            /* postSignIn(form).then(setIsAble(false))
+    validEntries ? (
+      navigate("/homepage")
+    ) : (
+      /* postSignIn(form).then(setIsAble(false))
             .catch(function () {
                 alert('Ocorreu um erro no login, tente novamente!');
                 setIsAble(true);
@@ -50,99 +51,116 @@ function SignIn() {
             }).finally(function(){
                 setIsAble(true);
             }) */
-        ) : <></>;
-    }
-
-    return (
-        <>
-            <Content>
-                <Logo>
-                    <img src={mosca} alt='' />
-                    <h1>Mosca</h1>
-                    <h1>Atacadista</h1>
-                </Logo>
-
-                <Form>
-                    <form onSubmit={makeSignIn}>
-                        <input type="text" name='email' value={form.email} onChange={handleForm} placeholder='E-mail' disabled={!isAble} />
-                        <input type="password" name='password' value={form.password} onChange={handleForm} placeholder='Senha' disabled={!isAble} />
-                        <button type="submit">
-                            {isAble ? 'Entrar' : <Oval
-                                height="20"
-                                width="80"
-                                color='white'
-                                secondaryColor="#AEA972"
-                                visible={true}
-                            />}
-                        </button>
-                    </form>
-                </Form>
-
-                <Link to='/signUp'>
-                    Não possui um login? Cadastre-se!
-                </Link>
-            </Content>
-        </>
+      <></>
     );
-};
+  };
+
+  return (
+    <>
+      <Content>
+        <Logo>
+          <img src={mosca} alt="" />
+          <h1>Mosca</h1>
+          <h1>Atacadista</h1>
+        </Logo>
+
+        <Form>
+          <form onSubmit={makeSignIn}>
+            <input
+              type="text"
+              name="email"
+              value={form.email}
+              onChange={handleForm}
+              placeholder="E-mail"
+              disabled={!isAble}
+            />
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleForm}
+              placeholder="Senha"
+              disabled={!isAble}
+            />
+            <button type="submit">
+              {isAble ? (
+                "Entrar"
+              ) : (
+                <Oval
+                  height="20"
+                  width="80"
+                  color="white"
+                  secondaryColor="#AEA972"
+                  visible={true}
+                />
+              )}
+            </button>
+          </form>
+        </Form>
+
+        <Link to="/signUp">Não possui um login? Cadastre-se!</Link>
+      </Content>
+    </>
+  );
+}
 
 export { SignIn };
 
 const Content = styled(ContentStyle)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100vw;
-    height: 100vh;
-    a {
-        text-decoration: none;
-        color: white;
-        text-align: center;
-        margin-top: 50px;
-        width: 30%;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    margin-top: 50px;
+    width: 30%;
+  }
 `;
 
 const Logo = styled(LogoStyle)`
-    font-family: 'Lobster';
-    left: 40px;
+  font-family: "Lobster";
+  left: 40px;
 
-    img {
-        height: 100px;
-        top: -20px;
-        left: -110px;
-    }
-    
-    h1 {
-        font-size: 40px;
-    }
+  img {
+    height: 100px;
+    top: -20px;
+    left: -110px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
 `;
 
 const Form = styled.div`
-    margin-top: 20px;
-    font-family: 'Raleway';
+  margin-top: 20px;
+  font-family: "Raleway";
 
-    input {
-        padding: 0 3%;
-        margin: 0 0 10px 6%;
-        width: 80%;
-        height: 58px;
-        border: none;
-        border-radius: 5px;
-    }
+  input {
+    padding: 0 3%;
+    margin: 0 0 10px 6%;
+    width: 80%;
+    height: 58px;
+    border: none;
+    border-radius: 5px;
+  }
 
-    button {
-        margin-left: 40%;
-        height: 46px;
-        width: 20%;
-        border: none;
-        border-radius: 5px;
-        background-color: #4e6a5e;
-        color: white;
-    }
+  button {
+    margin-left: 40%;
+    height: 46px;
+    width: 20%;
+    border: none;
+    border-radius: 5px;
+    background-color: #4e6a5e;
+    color: white;
+  }
 
-    input::placeholder {
-        color: black;
-    }
+  input::placeholder {
+    color: black;
+  }
 `;

@@ -104,7 +104,6 @@ const Content = styled(ContentStyle)`
 `;
 
 const SelectionLong = styled.div`
-  margin-top: 190px;
   width: 100%;
 
   & div {

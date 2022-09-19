@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Reset from "../stylesheet/reset.js";
-import PrivatePage from "./PrivatePage.js";
+import UserContext from "../contexts/UserContext.js";
 import { SignIn } from "./SignInPage.js";
 import { HomePage } from "./HomePage.js";
 import { SignUp } from "./SignUpPage.js";
-import { Product } from "./Product.js";
-import { Cart } from "./Cart.js";
+import PrivatePage from "./PrivatePage.js";
+import { Product } from "./ProductPage.js";
+import { Cart } from "./CartPage.js";
+import { Confirm } from './ConfirmPage.js';
 import { ProfilePage } from "./ProfilePage.js";
 import { AddProductPage } from "./NewProductPage.js";
 

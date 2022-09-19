@@ -8,6 +8,7 @@ import PrivatePage from "./PrivatePage.js";
 import { Product } from "./Product.js";
 import { Cart } from "./Cart.js";
 import { ProfilePage } from "./ProfilePage.js";
+import AddProductPage from "./NewProductPage.js";
 
 function App() {
   return (
@@ -19,13 +20,35 @@ function App() {
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/product" element={<Product />} />
-            <Route path="/user" element={<ProfilePage />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route
+              path="/cart"
+              element={
+                <PrivatePage>
+                  <Cart />
+                </PrivatePage>
+              }
+            />
+            <Route
+              path="/product/new"
+              element={
+                <PrivatePage>
+                  <AddProductPage />
+                </PrivatePage>
+              }
+            />
             <Route
               path="/homepage"
               element={
                 <PrivatePage>
                   <HomePage />
+                </PrivatePage>
+              }
+            />
+            <Route
+              path="/user"
+              element={
+                <PrivatePage>
+                  <ProfilePage />
                 </PrivatePage>
               }
             />

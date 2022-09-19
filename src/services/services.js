@@ -28,7 +28,12 @@ function getUser(config) {
 }
 
 function putUser(data, config) {
-  const promise = axios.put(`${BASE_URL}/user`,data, config);
+  const promise = axios.put(`${BASE_URL}/user`, data, config);
+  return promise;
+}
+
+function postProduct(data, config) {
+  const promise = axios.post(`${BASE_URL}/product`, data, config);
   return promise;
 }
 
@@ -39,4 +44,5 @@ export {
   getProductsInPromotion,
   getUser,
   putUser,
+  postProduct,
 };

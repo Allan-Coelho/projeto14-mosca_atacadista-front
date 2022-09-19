@@ -1,18 +1,15 @@
-import mosca from "../images/mosca.png";
 import styled from "styled-components";
-import { useState, useContext } from "react";
-import { ContentStyle, LogoStyle, Form } from "../stylesheet/models.js";
+import { useState } from "react";
+import { ContentStyle, Form } from "../stylesheet/models.js";
 import { Oval } from "react-loader-spinner";
 import { useNavigate, Link } from "react-router-dom";
 import { postSignUp } from "../services/services.js";
 import { signUpSchema } from "../Schemas/signUpSchema.js";
-import UserContext from "../contexts/UserContext.js";
+import Logo from "./components/shared/Logo.js";
 
 function SignUp() {
   const navigate = useNavigate();
-  const [validEntries, setValidEntries] = useState(false);
   const [isAble, setIsAble] = useState(true);
-  const { user, setUser } = useContext(UserContext);
   const [form, setForm] = useState({
     name: "",
     profilePictureURL: "",
@@ -31,14 +28,12 @@ function SignUp() {
   const signUp = (event) => {
     event.preventDefault();
     const validation = signUpSchema.validate(form, { abortEarly: false });
-    console.log(form);
+
     if (validation.error !== undefined) {
       alert(validation.error.message);
-      setValidEntries(false);
       return;
     }
 
-    setValidEntries(true);
     setIsAble(false);
 
     const body = {
@@ -50,22 +45,7 @@ function SignUp() {
     postSignUp(body)
       .then((response) => {
         setIsAble(true);
-        setUser({
-          ...user,
-          name: form.name,
-          profilePictureURL: form.profilePictureURL,
-          token: response.data,
-        });
-
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            name: form.name,
-            profilePictureURL: form.profilePictureURL,
-            token: response.data,
-          })
-        );
-
+        localStorage.setItem("auth", JSON.stringify(response.data));
         navigate("/homepage");
       })
       .catch((response) => {
@@ -77,12 +57,7 @@ function SignUp() {
 
   return (
     <Content>
-      <Logo>
-        <img src={mosca} alt="" />
-        <h1>Mosca</h1>
-        <h1>Atacadista</h1>
-      </Logo>
-
+      <Logo size="large" />
       <Form>
         <form onSubmit={signUp}>
           <input
@@ -161,20 +136,5 @@ const Content = styled(ContentStyle)`
     text-align: center;
     margin-top: 40px;
     width: 30%;
-  }
-`;
-
-const Logo = styled(LogoStyle)`
-  font-family: "Lobster";
-  left: 40px;
-
-  img {
-    height: 100px;
-    top: -20px;
-    left: -110px;
-  }
-
-  h1 {
-    font-size: 40px;
   }
 `;

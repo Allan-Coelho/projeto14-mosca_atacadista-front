@@ -23,7 +23,7 @@ function getProductsInPromotion(config) {
 }
 
 function getProductsById(config) {
-  const promise = axios.get(`${BASE_URL}/product/`, config);
+  const promise = axios.get(`${BASE_URL}/product`, config);
   return promise;
 }
 
@@ -42,4 +42,25 @@ function deleteCart(config) {
   return promise;
 }
 
-export { postSignIn, postSignUp, getProducts, getProductsInPromotion, getProductsById, postCart, getCart, deleteCart };
+function getUser(config) {
+  const promise = axios.get(`${BASE_URL}/user`, config);
+  return promise;
+}
+
+function putUser(data, config) {
+  const promise = axios.put(`${BASE_URL}/user`,data, config);
+  return promise;
+}
+
+export {
+  postSignIn,
+  postSignUp,
+  getProducts,
+  getProductsInPromotion,
+  getUser,
+  putUser,
+  deleteCart,
+  getCart,
+  postCart,
+  getProductsById,
+};

@@ -1,33 +1,27 @@
-import mosca from '../images/mosca.png';
 import styled from 'styled-components';
-import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle, ContentBoxStyle, MainInfoStyle} from '../stylesheet/models.js';
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { ContentStyle, ContentBoxStyle, MainInfoStyle} from '../stylesheet/models.js';
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import EmblaCarousel from "./EmblaCarouselProduct.js";
 import { getProductsById } from '../services/services.js';
+import Menu from "./components/shared/Menu.js";
+
 
 function Confirm (){
     const { productid } = useParams();
-    const navigate = useNavigate();
-    const auth = JSON.parse(localStorage.getItem('user'));
-    const config = { headers: {'Authorization': 'Bearer '+ auth}, params: { 'productId': productid}};
+    const auth = JSON.parse(localStorage.getItem('auth'));
+    const config = { headers: {'Authorization': 'Bearer '+ auth, 'productId': productid}};
     let SLIDE_COUNT = 6;
     let slides = Array.from(Array(SLIDE_COUNT).keys());
     const [ media, setMedia ] = useState([[], [], [], [], [], []])
     const [ product, setProduct ] = useState([]);
     let mediaByIndex = index => media[index % media.length];
 
-    const selectCategory = (event) => {
-        const category = event.target.value;
-        navigate('/products/'+category);
-    }
-
     useEffect(() => {
         getProductsById(config).then(
             (response) => {
                 if (response.data) {
                     setProduct(response.data);
-                    console.log(response.data)
                     setMedia([response.data.url, response.data.promotion]);
                     mediaByIndex = index => media[index % media.length];
                     SLIDE_COUNT = response.data.length;
@@ -38,36 +32,7 @@ function Confirm (){
 
     return (
         <Content>
-            <Menu>
-                <Logo>
-                    <img src={mosca} alt=''/>
-                    <h1>Mosca</h1>
-                    <h1>Atacadista</h1>
-                </Logo>
-
-                <div>
-                    <Selection>
-                        <select onChange={selectCategory}>
-                            <option value="0" defaultValue hidden>▲</option>
-                            <option value="1">Eletrônicos</option>
-                            <option value="2">Áudio e video</option>
-                            <option value="3">Moda</option>
-                            <option value="4">Mercearia</option>
-                            <option value="5">Livros</option>
-                            <option value="6">Instrumentos Musicais</option>
-                            <option value="7">Promoção</option>
-                            <option value="8">Saúde</option>
-                            <option value="9">Decoração</option>
-                            <option value="10">Brinquedos</option>
-                        </select>
-                    </Selection>
-                    
-                    <Link to='/user'>
-                        <ion-icon name="person"></ion-icon>
-                    </Link>
-                </div>
-            </Menu>
-               
+            <Menu />
             <ContentBox>
                 <EmblaCarousel slides={[slides, mediaByIndex]} />
 
@@ -100,22 +65,12 @@ const Content = styled(ContentStyle)`
     min-height: 100vh;
 
     p {
-        position: absolute;
+        width: 100%;
         top: 45%;
-        padding: 0 30%;
         font-family: 'Raleway';
-        text-align: center;
+        text-align: left;
     } 
 `;
-
-const Logo = styled(LogoStyle)`
-    left: 100px;
-    width: 120px;
-`;
-
-const Menu = styled(MenuStyle)``;
-
-const Selection = styled(SelectionStyle)``;
 
 const ContentBox = styled(ContentBoxStyle)`
     .embla {

@@ -51,71 +51,18 @@ const Form = styled.div`
   }
 `;
 
-const SelectionStyle = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-
-  select {
-    appearance: none;
-    position: absolute;
-    left: -46px;
-    bottom: -42px;
-    font-size: 38px;
-    color: #3d5248;
-    appearance: none;
-    border: none;
-    width: 38px;
-    transform: rotate(180deg);
-    background-color: transparent;
-    height: 38px;
-    font-family: "Raleway";
-    outline: 0;
-
-    option {
-      font-size: 24px;
-      background-color: #6a8e7f;
-    }
-  }
-`;
-
 const ContentBoxStyle = styled.div`
   background-color: white;
-  margin-top: 120px;
   width: 90%;
   border-radius: 25px;
   margin-bottom: 100px;
 `;
 
 const ContentStyle = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
   background: linear-gradient(to top, #aea972, #6a8e7f);
-`;
-
-const MenuStyle = styled.div`
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 95px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(to top, #75927d, #6a8e7f);
-  -moz-box-shadow: 0 10px 10px #75927d;
-  -webkit-box-shadow: 0 10px 10px #75927d;
-  box-shadow: 0 10px 10px #75927d;
-  z-index: 4;
-
-  div {
-    margin-right: 20px;
-  }
-
-  ion-icon {
-    margin-right: 10px;
-    font-size: 32px;
-    color: #3d5248;
-  }
 `;
 
 const SellingStyle = styled.div`
@@ -175,10 +122,8 @@ const MainInfoStyle = styled.div`
 
 export {
   LogoStyle,
-  SelectionStyle,
   ContentBoxStyle,
   ContentStyle,
-  MenuStyle,
   SellingStyle,
   MainInfoStyle,
   Form,

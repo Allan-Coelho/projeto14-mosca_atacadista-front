@@ -1,7 +1,7 @@
-import mosca from "../images/mosca.png";
 import styled from "styled-components";
+import Logo from "./components/shared/Logo.js";
 import { useState } from "react";
-import { ContentStyle, LogoStyle, Form } from "../stylesheet/models.js";
+import { ContentStyle, Form } from "../stylesheet/models.js";
 import { Oval } from "react-loader-spinner";
 import { useNavigate, Link } from "react-router-dom";
 import { postSignIn } from "../services/services.js";
@@ -24,76 +24,80 @@ function SignIn() {
   }
   
   const makeSignIn = (event) => {
-      const validation = signInSchema.validate(form, { abortEarly: false });
-      
-      if (validation.error) {
-          alert(validation.error.message);
-          setValidEntries(false);
-      } else {
-          setValidEntries(true);
-      }
+    const validation = signInSchema.validate(form, { abortEarly: false });
+    
+    if (validation.error) {
+        alert(validation.error.message);
+        setValidEntries(false);
+    } else {
+        setValidEntries(true);
+    }
 
-      validEntries ? (
-          
-          postSignIn(form).then(setIsAble(false))
-              .catch(function () {
-                  alert('Ocorreu um erro no login, tente novamente!');
-                  setIsAble(true);
-              }).then(function (response) {
-                  if (response) {
-                      localStorage.clear();
-                      localStorage.setItem( 'user', JSON.stringify(response.data));
-                      navigate('/homepage')
-                  }
-              }).finally(function(){
-                  setIsAble(true);
-              })
-          ) : <></>;
+    
+    validEntries ? (
+      postSignIn(form)
+        .then(setIsAble(false))
+        .catch(function () {
+          alert("Ocorreu um erro no login, tente novamente!");
+          setIsAble(true);
+        })
+        .then(function (response) {
+          if (response) {
+            localStorage.clear();
+            localStorage.setItem("auth", JSON.stringify(response.data));
+            navigate("/");
+          }
+        })
+        .finally(function () {
+          setIsAble(true);
+        })
+    ) : (
+      <></>
+    );
 
-      event.preventDefault();
-  }
+    event.preventDefault();
+  };
 
   return (
     <>
       <Content>
-        <Logo>
-          <img src={mosca} alt="" />
-          <h1>Mosca</h1>
-          <h1>Atacadista</h1>
-        </Logo>
+        <Logo size="large" />
 
         <FormStyle>
-          <form onSubmit={makeSignIn}>
-            <input
-              type="text"
-              name="email"
-              value={form.email}
-              onChange={handleForm}
-              placeholder="E-mail"
-              disabled={!isAble}
-            />
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleForm}
-              placeholder="Senha"
-              disabled={!isAble}
-            />
-            <button type="submit">
-              {isAble ? (
-                "Entrar"
-              ) : (
-                <Oval
-                  height="20"
-                  width="80"
-                  color="white"
-                  secondaryColor="#AEA972"
-                  visible={true}
-                />
-              )}
-            </button>
-          </form>
+        
+          <Form>
+            <form onSubmit={makeSignIn}>
+              <input
+                type="text"
+                name="email"
+                value={form.email}
+                onChange={handleForm}
+                placeholder="E-mail"
+                disabled={!isAble ? true : false}
+              />
+              <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleForm}
+                placeholder="Senha"
+                disabled={!isAble ? true : false}
+              />
+              <button type="submit">
+                {isAble ? (
+                  "Entrar"
+                ) : (
+                  <Oval
+                    height="20"
+                    width="80"
+                    color="white"
+                    secondaryColor="#AEA972"
+                    visible={true}
+                  />
+                )}
+              </button>
+            </form>
+          </Form>
         </FormStyle>
 
         <Link to="/signUp">Não possui um login? Cadastre-se!</Link>
@@ -109,29 +113,14 @@ const Content = styled(ContentStyle)`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 100vw;
   height: 100vh;
+
   a {
     text-decoration: none;
     color: white;
     text-align: center;
     margin-top: 50px;
     width: 30%;
-  }
-`;
-
-const Logo = styled(LogoStyle)`
-  font-family: "Lobster";
-  left: 40px;
-
-  img {
-    height: 100px;
-    top: -20px;
-    left: -110px;
-  }
-
-  h1 {
-    font-size: 40px;
   }
 `;
 

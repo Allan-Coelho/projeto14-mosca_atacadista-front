@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle, SellingStyle } from "../stylesheet/models.js";
-import mosca from '../images/mosca.png';
+import { ContentStyle } from "../stylesheet/models.js";
 import { useNavigate, Link } from "react-router-dom";
 import EmblaCarousel from "./EmblaCarousel.js";
 import { getProducts, getProductsInPromotion } from "../services/services.js";
 import { useEffect, useState } from "react";
+import Menu from "./components/shared/Menu.js";
 
 function HomePage () {
     const navigate = useNavigate();
-    const auth = JSON.parse(localStorage.getItem('user'));
+    const auth = JSON.parse(localStorage.getItem('auth'));
     const config = { headers:{'Authorization': 'Bearer '+ auth}};
     const [ products, setProducts ] = useState([]);
     let SLIDE_COUNT = 6;
@@ -36,62 +36,29 @@ function HomePage () {
             })
     }, []);
     
-    const selectCategory = (event) => {
-        const category = event.target.value;
-        navigate('/products/'+category)
-    }
-
     return (
-        <Content>
-            <Menu>
-                <Logo>
-                    <img src={mosca} alt=''/>
-                    <h1>Mosca</h1>
-                    <h1>Atacadista</h1>
-                </Logo>
-
-                <div>
-                    <Selection>
-                        <select onChange={selectCategory}>
-                            <option value="0" defaultValue hidden>▲</option>
-                            <option value="1">Eletrônicos</option>
-                            <option value="2">Áudio e video</option>
-                            <option value="3">Moda</option>
-                            <option value="4">Mercearia</option>
-                            <option value="5">Livros</option>
-                            <option value="6">Instrumentos Musicais</option>
-                            <option value="7">Promoção</option>
-                            <option value="8">Saúde</option>
-                            <option value="9">Decoração</option>
-                            <option value="10">Brinquedos</option>
-                        </select>
-                    </Selection>
-                    
-                    <Link to='/cart'>
-                        <ion-icon name="cart"></ion-icon>
-                    </Link>
-
-                    <Link to='/user'>
-                        <ion-icon name="person"></ion-icon>
-                    </Link>
-                </div>
-            </Menu>
-
-            <EmblaCarousel slides={[slides, mediaByIndex]} />
-                
-            <Selling>
-                    {products ? (products.map((product) => {
-                            return (
-                                <Link to={'/product/'+product.productId} key={product.productId}>
-                                    <img src={product.url}/>
-                                    <h2>{product.name}</h2>
-                                    <h3>{product.value}</h3>
-                                </Link>
-                            );
-                        })) : <></>}
-            </Selling>
-        
-        </Content>
+      <Content>
+        <Menu></Menu>
+        <EmblaCarousel slides={[slides, mediaByIndex]} />
+        <Selling>
+          {products ? (
+            products.map((product) => {
+              return (
+                <Link
+                  to={"/product/" + product.productId}
+                  key={product.productId}
+                >
+                  <img src={product.url} />
+                  <h2>{product.name}</h2>
+                  <h3>{product.value}</h3>
+                </Link>
+              );
+            })
+          ) : (
+            <></>
+          )}
+        </Selling>
+      </Content>
     );
 }
 
@@ -108,13 +75,40 @@ const Content = styled(ContentStyle)`
     }
 `;
 
-const Logo = styled(LogoStyle)`
-    left: 100px;
-    width: 120px;
+const Selling = styled.div`
+  display: table;
+  margin-top: 20px;
+
+  a {
+    float: left;
+    text-decoration: none;
+    background-color: white;
+    max-width: 42.5%;
+    width: 42.5%;
+    height: 210px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    border-radius: 15px;
+    font-family: "Raleway";
+    color: black;
+    margin-left: 5%;
+    position: relative;
+
+    img {
+      border-radius: 15px 15px 0 0;
+      width: 100%;
+      height: 70%;
+    }
+
+    h2 {
+      margin-left: 10px;
+    }
+
+    h3 {
+      position: absolute;
+      right: 10px;
+      bottom: 5px;
+      text-align: right;
+    }
+  }
 `;
-
-const Menu = styled(MenuStyle)``;
-
-const Selection = styled(SelectionStyle)``;
-
-const Selling = styled(SellingStyle)``;

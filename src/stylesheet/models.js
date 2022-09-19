@@ -25,7 +25,7 @@ const Form = styled.div`
 
   input {
     padding: 0 3%;
-    margin: 0 0 10px 7%;
+    margin: 0 0 10px 6%;
     width: 80%;
     height: 58px;
     border: none;
@@ -33,8 +33,18 @@ const Form = styled.div`
     font-size: 20px;
   }
 
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   button {
-    margin-left: 43%;
+    margin-left: 40%;
     height: 46px;
     border: none;
     padding: 5px;

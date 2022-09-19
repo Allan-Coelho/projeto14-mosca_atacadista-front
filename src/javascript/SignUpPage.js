@@ -1,18 +1,15 @@
 import mosca from "../images/mosca.png";
 import styled from "styled-components";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { ContentStyle, LogoStyle, Form } from "../stylesheet/models.js";
 import { Oval } from "react-loader-spinner";
 import { useNavigate, Link } from "react-router-dom";
 import { postSignUp } from "../services/services.js";
 import { signUpSchema } from "../Schemas/signUpSchema.js";
-import UserContext from "../contexts/UserContext.js";
 
 function SignUp() {
   const navigate = useNavigate();
-  const [validEntries, setValidEntries] = useState(false);
   const [isAble, setIsAble] = useState(true);
-  const { user, setUser } = useContext(UserContext);
   const [form, setForm] = useState({
     name: "",
     profilePictureURL: "",
@@ -31,14 +28,12 @@ function SignUp() {
   const signUp = (event) => {
     event.preventDefault();
     const validation = signUpSchema.validate(form, { abortEarly: false });
-    console.log(form);
+    
     if (validation.error !== undefined) {
       alert(validation.error.message);
-      setValidEntries(false);
       return;
     }
 
-    setValidEntries(true);
     setIsAble(false);
 
     const body = {
@@ -50,22 +45,7 @@ function SignUp() {
     postSignUp(body)
       .then((response) => {
         setIsAble(true);
-        setUser({
-          ...user,
-          name: form.name,
-          profilePictureURL: form.profilePictureURL,
-          token: response.data,
-        });
-
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            name: form.name,
-            profilePictureURL: form.profilePictureURL,
-            token: response.data,
-          })
-        );
-
+        localStorage.setItem("auth", JSON.stringify(response.data));
         navigate("/homepage");
       })
       .catch((response) => {

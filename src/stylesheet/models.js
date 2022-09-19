@@ -23,7 +23,7 @@ const Form = styled.div`
   margin-top: 20px;
   font-family: "Raleway";
 
-  input {
+  input, span {
     padding: 0 3%;
     margin: 0 0 10px 6%;
     width: 80%;
@@ -45,7 +45,7 @@ const Form = styled.div`
     cursor: pointer;
     font-size: 20px;
   }
-
+   
   input::placeholder {
     color: black;
   }

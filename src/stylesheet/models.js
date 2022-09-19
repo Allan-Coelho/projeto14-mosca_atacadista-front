@@ -59,8 +59,9 @@ const ContentBoxStyle = styled.div`
 `;
 
 const ContentStyle = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
   background: linear-gradient(to top, #aea972, #6a8e7f);
 `;
 

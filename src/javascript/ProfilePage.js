@@ -173,20 +173,7 @@ const ProfilePicture = styled.img`
   }}
   background-size: cover;
 `;
-const Content = styled(ContentStyle)`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-
-  p {
-    position: absolute;
-    top: 45%;
-    padding: 0 30%;
-    font-family: "Raleway";
-    text-align: center;
-  }
-`;
+const Content = styled(ContentStyle)``;
 const FormsLabel = styled.span`
   font-size: 20px;
   padding: 0 3%;

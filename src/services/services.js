@@ -22,4 +22,9 @@ function getProductsInPromotion(config) {
   return promise;
 }
 
-export { postSignIn, postSignUp, getProducts, getProductsInPromotion };
+function getProductsById(config) {
+  const promise = axios.get(`${BASE_URL}/product/`, config);
+  return promise;
+}
+
+export { postSignIn, postSignUp, getProducts, getProductsInPromotion, getProductsById };

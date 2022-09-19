@@ -1,20 +1,39 @@
 import mosca from '../images/mosca.png';
 import styled from 'styled-components';
 import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle, ContentBoxStyle, MainInfoStyle } from '../stylesheet/models.js';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
 import EmblaCarousel from "./EmblaCarouselProduct.js";
+import { getProductsById } from '../services/services.js';
 
 function Product (){
+    const { productid } = useParams();
     const navigate = useNavigate();
+    const auth = JSON.parse(localStorage.getItem('user'));
+    const config = { headers:{'Authorization': 'Bearer '+ auth}, params: { 'productId': productid}};
     let SLIDE_COUNT = 6;
     let slides = Array.from(Array(SLIDE_COUNT).keys());
-    let media = [["https://cdn.awsli.com.br/600x450/44/44273/produto/29988397/20d63df911.jpg", 0], ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi58uIlj8FdzAtwUxZmvuSsZZ37efS_H0naQ&usqp=CAU', 0], [], [], [], []]
+    const [ media, setMedia ] = useState([[], [], [], [], [], []])
+    const [ product, setProduct ] = useState([]);
     let mediaByIndex = index => media[index % media.length];
 
     const selectCategory = (event) => {
         const category = event.target.value;
-        navigate('/products/?category='+category)
+        navigate('/products/'+category)
     }
+
+    useEffect(() => {
+        getProductsById(config).then(
+            function (response) {
+                if (response.data) {
+                    setProduct(response.data);
+                    setMedia([response.data.url, response.data.promotion]);
+                    mediaByIndex = index => media[index % media.length];
+                    SLIDE_COUNT = response.data.length;
+                    slides = Array.from(Array(SLIDE_COUNT).keys());
+                }
+            })
+    }, []);
 
     return (
         <Content>
@@ -56,13 +75,13 @@ function Product (){
                 <EmblaCarousel slides={[slides, mediaByIndex]} />
 
                 <MainInfo>
-                    <h2>Camisa</h2>
-                    <h3>22,50</h3>
+                    <h2>{product.name}</h2>
+                    <h3>{product.value -((product.value * product.promotion)/100)} </h3>
                 </MainInfo>
 
                 <div>
                     <p>Descrição:</p>
-                    <p>nao sei o que nao sei o que nao sei o que nao sei o que nao sei o que nao sei o que nao sei o que nao sei o que </p>
+                    <p>{product.description}</p>
                 </div>
             </ContentBox>
         </Content>

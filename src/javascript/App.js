@@ -22,18 +22,16 @@ function App() {
       <UserContext.Provider value={{ user, setUser }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<SignIn />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route
-              path="/homepage"
+            <Route path="/signin" element={<SignIn />}/>
+            <Route path="/product/:productid" element={<Product />} />
+            <Route path="/cart"
               element={
                 <PrivatePage>
-                  <HomePage />
+                  <Cart />
                 </PrivatePage>
-              }
-            />
-            <Route path="/product" element={<Product />} />
-            <Route path="/cart" element={<Cart />} />
+              } />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

@@ -39,7 +39,7 @@ const EmblaCarousel = (object) => {
               <div
                 className="embla__slide__inner"
                 onClick={() =>
-                  navigate("/product/?productId=" + mediaByIndex(index)[2])
+                  navigate("/product/" + mediaByIndex(index)[2])
                 }
               >
                 <img

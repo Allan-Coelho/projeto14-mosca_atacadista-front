@@ -1,7 +1,7 @@
 import mosca from "../images/mosca.png";
 import styled from "styled-components";
 import { useState } from "react";
-import { ContentStyle, LogoStyle } from "../stylesheet/models.js";
+import { ContentStyle, LogoStyle, Form } from "../stylesheet/models.js";
 import { Oval } from "react-loader-spinner";
 import { useNavigate, Link } from "react-router-dom";
 import { postSignIn } from "../services/services.js";
@@ -12,48 +12,46 @@ function SignIn() {
   const [validEntries, setValidEntries] = useState(false);
   const [isAble, setIsAble] = useState(true);
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+      email: '',
+      password: '',
   });
 
-  function handleForm(e) {
-    setForm({
+  function handleForm (e) {
+      setForm({
       ...form,
       [e.target.name]: e.target.value,
-    });
+      })
   }
-
+  
   const makeSignIn = (event) => {
-    event.preventDefault();
-    const validation = signInSchema.validate(form, { abortEarly: false });
+      const validation = signInSchema.validate(form, { abortEarly: false });
+      
+      if (validation.error) {
+          alert(validation.error.message);
+          setValidEntries(false);
+      } else {
+          setValidEntries(true);
+      }
 
-    if (validation.error) {
-      alert(validation.error.message);
-      setValidEntries(false);
-    } else {
-      setValidEntries(true);
-    }
+      validEntries ? (
+          
+          postSignIn(form).then(setIsAble(false))
+              .catch(function () {
+                  alert('Ocorreu um erro no login, tente novamente!');
+                  setIsAble(true);
+              }).then(function (response) {
+                  if (response) {
+                      localStorage.clear();
+                      localStorage.setItem( 'user', JSON.stringify(response.data));
+                      navigate('/homepage')
+                  }
+              }).finally(function(){
+                  setIsAble(true);
+              })
+          ) : <></>;
 
-    validEntries ? (
-      navigate("/homepage")
-    ) : (
-      /* postSignIn(form).then(setIsAble(false))
-            .catch(function () {
-                alert('Ocorreu um erro no login, tente novamente!');
-                setIsAble(true);
-            }).then(function (response) {
-                if (response) {
-                    console.log(response.data)
-                    localStorage.clear();
-                    localStorage.setItem( 'auth', JSON.stringify({ authorization: response.data.token}));
-                    
-                }
-            }).finally(function(){
-                setIsAble(true);
-            }) */
-      <></>
-    );
-  };
+      event.preventDefault();
+  }
 
   return (
     <>
@@ -64,7 +62,7 @@ function SignIn() {
           <h1>Atacadista</h1>
         </Logo>
 
-        <Form>
+        <FormStyle>
           <form onSubmit={makeSignIn}>
             <input
               type="text"
@@ -96,7 +94,7 @@ function SignIn() {
               )}
             </button>
           </form>
-        </Form>
+        </FormStyle>
 
         <Link to="/signUp">Não possui um login? Cadastre-se!</Link>
       </Content>
@@ -137,30 +135,8 @@ const Logo = styled(LogoStyle)`
   }
 `;
 
-const Form = styled.div`
-  margin-top: 20px;
-  font-family: "Raleway";
-
-  input {
-    padding: 0 3%;
-    margin: 0 0 10px 6%;
-    width: 80%;
-    height: 58px;
-    border: none;
-    border-radius: 5px;
-  }
-
+const FormStyle = styled(Form)`
   button {
-    margin-left: 40%;
-    height: 46px;
-    width: 20%;
-    border: none;
-    border-radius: 5px;
-    background-color: #4e6a5e;
-    color: white;
-  }
-
-  input::placeholder {
-    color: black;
+    margin-left: 45%;
   }
 `;

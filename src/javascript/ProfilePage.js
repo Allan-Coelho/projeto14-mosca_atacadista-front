@@ -137,7 +137,7 @@ function ProfilePage() {
             </Form>
 
             <BannerAddProduct>
-              <Link to="/product">
+              <Link to="/product/new">
                 <AddProduct>{"Venha vender conosco!"}</AddProduct>
               </Link>
             </BannerAddProduct>

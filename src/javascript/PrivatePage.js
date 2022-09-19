@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function verifyAuthentication() {
-  const userLocalStorage = localStorage.getItem("user");
+  const userLocalStorage = localStorage.getItem("auth");
 
   if (userLocalStorage === null) {
     return false;

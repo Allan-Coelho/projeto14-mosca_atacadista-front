@@ -24,7 +24,6 @@ function SignIn() {
   }
 
   const makeSignIn = (event) => {
-    event.preventDefault();
     const validation = signInSchema.validate(form, { abortEarly: false });
 
     if (validation.error) {
@@ -35,24 +34,28 @@ function SignIn() {
     }
 
     validEntries ? (
-      navigate("/homepage")
+      postSignIn(form)
+        .then(setIsAble(false))
+        .catch(function () {
+          alert("Ocorreu um erro no login, tente novamente!");
+          setIsAble(true);
+        })
+        .then(function (response) {
+          if (response) {
+            console.log(response.data);
+            localStorage.clear();
+            localStorage.setItem("auth", response.data);
+            navigate("/homepage");
+          }
+        })
+        .finally(function () {
+          setIsAble(true);
+        })
     ) : (
-      /* postSignIn(form).then(setIsAble(false))
-            .catch(function () {
-                alert('Ocorreu um erro no login, tente novamente!');
-                setIsAble(true);
-            }).then(function (response) {
-                if (response) {
-                    console.log(response.data)
-                    localStorage.clear();
-                    localStorage.setItem( 'auth', JSON.stringify({ authorization: response.data.token}));
-                    
-                }
-            }).finally(function(){
-                setIsAble(true);
-            }) */
       <></>
     );
+
+    event.preventDefault();
   };
 
   return (
@@ -72,7 +75,7 @@ function SignIn() {
               value={form.email}
               onChange={handleForm}
               placeholder="E-mail"
-              disabled={!isAble}
+              disabled={!isAble ? true : false}
             />
             <input
               type="password"
@@ -80,7 +83,7 @@ function SignIn() {
               value={form.password}
               onChange={handleForm}
               placeholder="Senha"
-              disabled={!isAble}
+              disabled={!isAble ? true : false}
             />
             <button type="submit">
               {isAble ? (
@@ -111,8 +114,8 @@ const Content = styled(ContentStyle)`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 100vw;
   height: 100vh;
+
   a {
     text-decoration: none;
     color: white;
@@ -145,14 +148,14 @@ const Form = styled.div`
     padding: 0 3%;
     margin: 0 0 10px 6%;
     width: 80%;
-    height: 58px;
+    height: 30px;
     border: none;
     border-radius: 5px;
   }
 
   button {
     margin-left: 40%;
-    height: 46px;
+    height: 30px;
     width: 20%;
     border: none;
     border-radius: 5px;

@@ -17,9 +17,9 @@ function Cart (){
     }
 
     const deleteProduct = (productId) => {
-        deleteCart({ headers:{'Authorization': 'Bearer '+ auth}, body: {'productId': productId}}).then(
-        ) 
+        deleteCart({ headers:{'Authorization': 'Bearer '+ auth, 'productId': productId}}).then(
         
+        ) 
     }
     
     useEffect(() => {

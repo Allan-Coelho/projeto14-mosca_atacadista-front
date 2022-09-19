@@ -53,7 +53,6 @@ const Form = styled.div`
 
 const ContentBoxStyle = styled.div`
   background-color: white;
-  margin-top: 120px;
   width: 90%;
   border-radius: 25px;
   margin-bottom: 100px;

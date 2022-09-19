@@ -96,7 +96,7 @@ function ProfilePage() {
           />
         ) : (
           <>
-            <ProfilePicture src={user.profilePictureURL} />
+            <ProfilePicture picture={user.profilePictureURL} />
             <Name>{user.name}</Name>
             <Form>
               <form onSubmit={saveChanges}>
@@ -154,9 +154,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  padding: 110px 10px 0px 10px;
+  padding: 10px 10px 0px 10px;
 `;
 const Name = styled.span`
   font-size: 24px;
@@ -170,12 +168,16 @@ const ProfilePicture = styled.img`
   width: 100px;
   height: 100px;
   border: 1px white solid;
+  ${(props) => {
+    return `background: url(${props.picture}) center center no-repeat;`;
+  }}
+  background-size: cover;
 `;
 const Content = styled(ContentStyle)`
   display: flex;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 
   p {
     position: absolute;

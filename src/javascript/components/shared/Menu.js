@@ -43,9 +43,10 @@ export default function Menu() {
 }
 
 const MenuStyle = styled.div`
-  position: fixed;
+  position: sticky;
   top: 0;
-  width: 100%;
+  left: 0;
+  width: 100vw;
   height: 95px;
   display: flex;
   align-items: center;
@@ -67,7 +68,7 @@ const MenuStyle = styled.div`
   }
 `;
 
-const SelectionStyle = styled.div`
+const Selection = styled.div`
   display: flex;
   align-items: center;
   position: relative;
@@ -95,8 +96,8 @@ const SelectionStyle = styled.div`
   }
 `;
 
-const Selection = styled(SelectionStyle)``;
 const Wrapper = styled(MenuStyle)`
+  margin-bottom: 10px;
   a {
     text-decoration: none;
   }

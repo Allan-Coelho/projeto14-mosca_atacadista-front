@@ -1,5 +1,5 @@
-import mosca from "../images/mosca.png";
 import styled from "styled-components";
+import Logo from "./components/shared/Logo.js";
 import { useState } from "react";
 import { ContentStyle, LogoStyle } from "../stylesheet/models.js";
 import { Oval } from "react-loader-spinner";
@@ -61,12 +61,7 @@ function SignIn() {
   return (
     <>
       <Content>
-        <Logo>
-          <img src={mosca} alt="" />
-          <h1>Mosca</h1>
-          <h1>Atacadista</h1>
-        </Logo>
-
+        <Logo size="large" />
         <Form>
           <form onSubmit={makeSignIn}>
             <input
@@ -125,7 +120,7 @@ const Content = styled(ContentStyle)`
   }
 `;
 
-const Logo = styled(LogoStyle)`
+/* const Logo = styled(LogoStyle)`
   font-family: "Lobster";
   left: 40px;
 
@@ -138,7 +133,7 @@ const Logo = styled(LogoStyle)`
   h1 {
     font-size: 40px;
   }
-`;
+`; */
 
 const Form = styled.div`
   margin-top: 20px;

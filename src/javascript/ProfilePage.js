@@ -1,13 +1,8 @@
 import styled, { keyframes } from "styled-components";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-  ContentStyle,
-  LogoStyle,
-  MenuStyle,
-  SelectionStyle,
-} from "../stylesheet/models.js";
-import mosca from "../images/mosca.png";
+import Menu from "./components/shared/Menu.js";
+import { ContentStyle } from "../stylesheet/models.js";
 import { getUser, putUser } from "../services/services.js";
 import { Oval } from "react-loader-spinner";
 import { Form } from "../stylesheet/models.js";
@@ -23,17 +18,17 @@ function blinkingEffect() {
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
-  const token = JSON.parse(localStorage.getItem("auth"));
-  const navigate = useNavigate();
+  const token = localStorage.getItem("auth");
   const [isLoading, setIsLoading] = useState(false);
-  const selectCategory = (event) => {
-    const category = event.target.value;
-    navigate("/products/?category=" + category);
-  };
   const [form, setForm] = useState({
     name: "",
     profilePictureURL: "",
   });
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
   function handleForm(e) {
     setForm({
@@ -59,12 +54,6 @@ function ProfilePage() {
       return;
     }
 
-    const config = {
-      headers: {
-        Authorization: "Bearer" + " " + token,
-      },
-    };
-
     const body = {
       name: form.name,
       profilePictureURL: form.profilePictureURL,
@@ -76,12 +65,8 @@ function ProfilePage() {
       setIsLoading(false);
     });
   }
+
   useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: "Bearer" + " " + token,
-      },
-    };
     const promise = getUser(config);
 
     setIsLoading(true);
@@ -94,41 +79,12 @@ function ProfilePage() {
       });
       setIsLoading(false);
     });
-  }, [token]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Content>
-      <Menu>
-        <Logo>
-          <img src={mosca} alt="" />
-          <h1>Mosca</h1>
-          <h1>Atacadista</h1>
-        </Logo>
-
-        <div>
-          <Selection>
-            <select onChange={selectCategory}>
-              <option value="0" defaultValue hidden>
-                ▲
-              </option>
-              <option value="1">Eletrônicos</option>
-              <option value="2">Áudio e video</option>
-              <option value="3">Moda</option>
-              <option value="4">Mercearia</option>
-              <option value="5">Livros</option>
-              <option value="6">Instrumentos Musicais</option>
-              <option value="7">Promoção</option>
-              <option value="8">Saúde</option>
-              <option value="9">Decoração</option>
-              <option value="10">Brinquedos</option>
-            </select>
-          </Selection>
-
-          <Link to="/user">
-            <ion-icon name="person"></ion-icon>
-          </Link>
-        </div>
-      </Menu>
+      <Menu />
       <Wrapper>
         {isLoading || user === null ? (
           <Oval
@@ -194,8 +150,6 @@ function ProfilePage() {
 
 export { ProfilePage };
 
-const Selection = styled(SelectionStyle)``;
-const Menu = styled(MenuStyle)``;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -210,10 +164,6 @@ const Name = styled.span`
   font-family: "Raleway";
   font-weight: 500;
   color: white;
-`;
-const Logo = styled(LogoStyle)`
-  left: 100px;
-  width: 120px;
 `;
 const ProfilePicture = styled.img`
   border-radius: 50%;

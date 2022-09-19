@@ -22,6 +22,7 @@ export default function PrivatePage({ children }) {
       console.log("Rota protegida, usuário não autorizado.");
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return isAuthenticated ? children : <></>;

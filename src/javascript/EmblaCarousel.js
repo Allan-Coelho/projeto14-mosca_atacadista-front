@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { PrevButton, NextButton } from "./EmblaCarouselButtons.js";
 import useEmblaCarousel from "embla-carousel-react";
+import { mediaByIndex } from "../media/indexMedia.js";
 import { useNavigate } from "react-router-dom";
 import "../css/Embla.css";
 
@@ -38,7 +39,7 @@ const EmblaCarousel = (object) => {
               <div
                 className="embla__slide__inner"
                 onClick={() =>
-                  navigate("/product/" + mediaByIndex(index)[2])
+                  navigate("/product/?productId=" + mediaByIndex(index)[2])
                 }
               >
                 <img

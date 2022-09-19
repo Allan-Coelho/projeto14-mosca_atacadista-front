@@ -38,10 +38,10 @@ const EmblaCarousel = (object) => {
               <div className="embla__slide__inner" >
                 <img
                   className="embla__slide__img"
-                  src={mediaByIndex(0)[index]}
+                  src={mediaByIndex(index)[0]}
                   alt=""
                 />
-                {mediaByIndex(1) !== 0 ? (<div className="promotion">{mediaByIndex(1)+'%'}</div>) : ''}
+                {mediaByIndex(index)[1] !== 0 ? (<div className="promotion">{mediaByIndex(index)[1]+'%'}</div>) : ''}
               </div>
             </div>
           ))}

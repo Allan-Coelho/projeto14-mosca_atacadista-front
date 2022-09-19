@@ -7,12 +7,12 @@ export default function Menu() {
   const navigate = useNavigate();
   const selectCategory = (event) => {
     const category = event.target.value;
-    navigate("/products/" + category);
+    navigate("/products/?category=" + category);
   };
 
   return (
     <Wrapper>
-      <Link to={"/"}>
+      <Link to={"/homepage"}>
         <Logo />
       </Link>
       <div>
@@ -21,23 +21,19 @@ export default function Menu() {
             <option value="0" defaultValue hidden>
               ▲
             </option>
-            <option value="Eletronicos">Eletrônicos</option>
-            <option value="Audio-e-video">Áudio e video</option>
-            <option value="Moda">Moda</option>
-            <option value="Mercearia">Mercearia</option>
-            <option value="Livros">Livros</option>
-            <option value="Instrumentos-Musicais">Instrumentos Musicais</option>
-            <option value="Promocao">Promoção</option>
-            <option value="Saude">Saúde</option>
-            <option value="Decoracao">Decoração</option>
-            <option value="Brinquedos">Brinquedos</option>
+            <option value="1">Eletrônicos</option>
+            <option value="2">Áudio e video</option>
+            <option value="3">Moda</option>
+            <option value="4">Mercearia</option>
+            <option value="5">Livros</option>
+            <option value="6">Instrumentos Musicais</option>
+            <option value="7">Promoção</option>
+            <option value="8">Saúde</option>
+            <option value="9">Decoração</option>
+            <option value="10">Brinquedos</option>
           </select>
         </Selection>
-      
-        <Link to="/cart">
-          <ion-icon name="cart"></ion-icon>
-        </Link>
-        
+
         <Link to="/user">
           <ion-icon name="person"></ion-icon>
         </Link>

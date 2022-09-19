@@ -1,30 +1,33 @@
-import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import { deleteCart, getCart } from '../services/services.js';
+import styled from "styled-components";
 import { ContentStyle } from "../stylesheet/models.js";
 import Menu from "./components/shared/Menu.js";
 import { Link } from "react-router-dom";
 
 function Cart() {
-    const auth = JSON.parse(localStorage.getItem("auth"));
-    const config = { headers:{'Authorization': 'Bearer '+ auth}};
-    const [ cartProducts, setCartProducts ] = useState([]);
+  let cartProducts = [
+    {
+      _id: "teste",
+      url: [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi58uIlj8FdzAtwUxZmvuSsZZ37efS_H0naQ&usqp=CAU",
+      ],
+      promotion: 10,
+      value: 22.5,
+      name: "camisa",
+    },
+    {
+      _id: "teste",
+      url: [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi58uIlj8FdzAtwUxZmvuSsZZ37efS_H0naQ&usqp=CAU",
+      ],
+      promotion: 0,
+      value: 22.5,
+      name: "camisa",
+    },
+  ];
 
-    const deleteProduct = (productId) => {
-        config.headers = {'Authorization': 'Bearer '+ auth, 'productId': productId}
-        deleteCart(config).then(
-        
-        ) 
-    }
-    
-    useEffect(() => {
-        getCart(config).then(
-            function (response) {
-                if (response) {
-                    setCartProducts(response.data);
-                }
-            })
-    }, []);
+  const deleteProduct = (productId) => {
+    console.log(productId);
+  };
 
   return (
     <Content>
@@ -67,7 +70,7 @@ function Cart() {
                     <span
                       onClick={(e) => {
                         e.preventDefault();
-                        deleteProduct(product._id)
+                        console.log(product._id);
                       }}
                     >
                       <ion-icon name="close-outline"></ion-icon>
@@ -97,7 +100,6 @@ const Content = styled(ContentStyle)`
     padding: 0 30%;
     font-family: "Raleway";
     text-align: center;
-    color: white;
   }
 `;
 

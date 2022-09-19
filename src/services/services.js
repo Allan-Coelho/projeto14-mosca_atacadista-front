@@ -1,44 +1,24 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://git.heroku.com/moscaatacadista.git";
 
-function postSignIn(config) {
-  const promise = axios.post(`${BASE_URL}/signIn`, config);
+function postSignIn(body) {
+  const promise = axios.post(`${BASE_URL}/signIn`, body);
   return promise;
 }
 
-function postSignUp(config) {
-  const promise = axios.post(`${BASE_URL}/user`, config);
+function postSignUp(body) {
+  const promise = axios.post(`${BASE_URL}/user`, body);
   return promise;
 }
 
-function getProducts(config) {
-  const promise = axios.get(`${BASE_URL}/products`, config);
+function getProducts(header) {
+  const promise = axios.get(`${BASE_URL}/products`, header);
   return promise;
 }
 
 function getProductsInPromotion(config) {
   const promise = axios.get(`${BASE_URL}/products/category/Promocao`, config);
-  return promise;
-}
-
-function getProductsById(config) {
-  const promise = axios.get(`${BASE_URL}/product`, config);
-  return promise;
-}
-
-function getCart(config) {
-  const promise = axios.get(`${BASE_URL}/cart`, config);
-  return promise;
-}
-
-function postCart(config) {
-  const promise = axios.post(`${BASE_URL}/cart`, config);
-  return promise;
-}
-
-function deleteCart(config) {
-  const promise = axios.delete(`${BASE_URL}/cart`, config);
   return promise;
 }
 
@@ -48,7 +28,12 @@ function getUser(config) {
 }
 
 function putUser(data, config) {
-  const promise = axios.put(`${BASE_URL}/user`,data, config);
+  const promise = axios.put(`${BASE_URL}/user`, data, config);
+  return promise;
+}
+
+function postProduct(data, config) {
+  const promise = axios.post(`${BASE_URL}/product`, data, config);
   return promise;
 }
 
@@ -59,8 +44,5 @@ export {
   getProductsInPromotion,
   getUser,
   putUser,
-  deleteCart,
-  getCart,
-  postCart,
-  getProductsById,
+  postProduct,
 };

@@ -18,7 +18,7 @@ function blinkingEffect() {
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
-  const token = JSON.parse(localStorage.getItem("auth"));
+  const token = localStorage.getItem("auth");
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -137,7 +137,7 @@ function ProfilePage() {
             </Form>
 
             <BannerAddProduct>
-              <Link to="/product">
+              <Link to="/product/new">
                 <AddProduct>{"Venha vender conosco!"}</AddProduct>
               </Link>
             </BannerAddProduct>

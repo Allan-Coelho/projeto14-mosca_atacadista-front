@@ -23,7 +23,7 @@ function HomePage () {
                     setProducts(response.data);
                 }
             })
-        getProductsInPromotion({headers:{'Authorization': 'Bearer '+ auth}}).then(
+        getProductsInPromotion(config).then(
             function (response) {
                 if (response.data) {
                     let arr = [];

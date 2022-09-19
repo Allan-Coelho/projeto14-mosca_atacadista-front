@@ -1,12 +1,12 @@
 import mosca from '../images/mosca.png';
 import styled from 'styled-components';
-import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle, ContentBoxStyle, MainInfoStyle } from '../stylesheet/models.js';
+import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle, ContentBoxStyle, MainInfoStyle} from '../stylesheet/models.js';
 import { useNavigate, Link, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import EmblaCarousel from "./EmblaCarouselProduct.js";
-import { getProductsById, postCart } from '../services/services.js';
+import { getProductsById } from '../services/services.js';
 
-function Product (){
+function Confirm (){
     const { productid } = useParams();
     const navigate = useNavigate();
     const auth = JSON.parse(localStorage.getItem('user'));
@@ -19,24 +19,15 @@ function Product (){
 
     const selectCategory = (event) => {
         const category = event.target.value;
-        navigate('/products/'+category)
-    };
-
-    const addCart = () => {
-        postCart(config).then(
-            (response) => {
-                if (response.data) {
-                    navigate('/cart')
-                }
-            }
-        )
-    };
+        navigate('/products/'+category);
+    }
 
     useEffect(() => {
         getProductsById(config).then(
             (response) => {
                 if (response.data) {
                     setProduct(response.data);
+                    console.log(response.data)
                     setMedia([response.data.url, response.data.promotion]);
                     mediaByIndex = index => media[index % media.length];
                     SLIDE_COUNT = response.data.length;
@@ -71,16 +62,12 @@ function Product (){
                         </select>
                     </Selection>
                     
-                    <Link to='/cart'>
-                        <ion-icon name="cart"></ion-icon>
-                    </Link>
-
                     <Link to='/user'>
                         <ion-icon name="person"></ion-icon>
                     </Link>
                 </div>
             </Menu>
-
+               
             <ContentBox>
                 <EmblaCarousel slides={[slides, mediaByIndex]} />
 
@@ -95,8 +82,8 @@ function Product (){
                 </div>
 
                 <div>
-                    <button onClick={addCart}>
-                        Adicionar ao carrinho
+                    <button onClick={() => {alert('Compra finalizada com sucesso!')}}>
+                        Finalizar compra
                     </button>
                 </div>
             </ContentBox>
@@ -104,14 +91,21 @@ function Product (){
     );
 }
 
-export { Product };
+export { Confirm };
 
 const Content = styled(ContentStyle)`
     display: flex;
     align-items: center;
     flex-direction: column;
+    min-height: 100vh;
 
-    
+    p {
+        position: absolute;
+        top: 45%;
+        padding: 0 30%;
+        font-family: 'Raleway';
+        text-align: center;
+    } 
 `;
 
 const Logo = styled(LogoStyle)`

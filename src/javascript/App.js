@@ -7,7 +7,8 @@ import UserContext from "../contexts/UserContext.js";
 import { useState } from "react";
 import PrivatePage from "./PrivatePage.js";
 import { Product } from "./Product.js";
-import { Cart } from "./Cart.js";
+import { Cart } from "./CartPage.js";
+import { Confirm } from './ConfirmPage.js';
 
 function App() {
   const [user, setUser] = useState({
@@ -30,6 +31,12 @@ function App() {
               element={
                 <PrivatePage>
                   <Cart />
+                </PrivatePage>
+              } />
+              <Route path="/confirm/:productid"
+              element={
+                <PrivatePage>
+                  <Confirm />
                 </PrivatePage>
               } />
           </Routes>

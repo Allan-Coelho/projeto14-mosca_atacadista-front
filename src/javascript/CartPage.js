@@ -2,20 +2,34 @@ import mosca from '../images/mosca.png';
 import styled from 'styled-components';
 import { ContentStyle, LogoStyle, MenuStyle, SelectionStyle} from '../stylesheet/models.js';
 import { useNavigate, Link } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { deleteCart, getCart } from '../services/services.js';
 
 function Cart (){
     const navigate = useNavigate();
-    let cartProducts = [{_id: 'teste', url: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi58uIlj8FdzAtwUxZmvuSsZZ37efS_H0naQ&usqp=CAU'], promotion: 10, value: 22.5, name: 'camisa'}, {_id: 'teste', url: ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi58uIlj8FdzAtwUxZmvuSsZZ37efS_H0naQ&usqp=CAU'], promotion: 0, value: 22.5, name: 'camisa'}];
+    const auth = JSON.parse(localStorage.getItem('user'));
+    const config = { headers:{'Authorization': 'Bearer '+ auth}};
+    const [ cartProducts, setCartProducts ] = useState([]);
 
     const selectCategory = (event) => {
         const category = event.target.value;
-        navigate('/products/?category='+category);
+        navigate('/products/'+category);
     }
 
     const deleteProduct = (productId) => {
-        console.log(productId);
+        deleteCart({ headers:{'Authorization': 'Bearer '+ auth}, body: {'productId': productId}}).then(
+        ) 
+        
     }
+    
+    useEffect(() => {
+        getCart(config).then(
+            function (response) {
+                if (response) {
+                    setCartProducts(response.data);
+                }
+            })
+    }, []);
 
     return (
         <Content>
@@ -68,7 +82,7 @@ function Cart (){
                                                     <ion-icon name="checkmark-outline"></ion-icon>
                                                 </Link>
                                             </span>
-                                            <span onClick={(e) => {e.preventDefault(); console.log(product._id)}}>
+                                            <span onClick={(e) => {e.preventDefault(); deleteProduct(product._id)}}>
                                                     <ion-icon name="close-outline"></ion-icon>
                                             </span>
                                         </div>

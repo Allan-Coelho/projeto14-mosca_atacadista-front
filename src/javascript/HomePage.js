@@ -6,6 +6,8 @@ import { getProducts, getProductsInPromotion } from "../services/services.js";
 import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu.js";
 
+/* comentario */
+
 function HomePage () {
     const navigate = useNavigate();
     const auth = JSON.parse(localStorage.getItem('auth'));

@@ -55,7 +55,16 @@ const Form = styled.div`
     cursor: pointer;
     font-size: 20px;
   }
-
+  select {
+    padding: 0 3%;
+    margin: 0 0 10px 6%;
+    width: 86%;
+    height: 58px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: white;
+  }
   input::placeholder {
     color: black;
   }

@@ -17,6 +17,11 @@ function getProducts(header) {
   return promise;
 }
 
+function getProductsByCategory(header) {
+  const promise = axios.get(`${BASE_URL}/products`, header);
+  return promise;
+}
+
 function getProductsInPromotion(config) {
   const promise = axios.get(`${BASE_URL}/products/category/Promocao`, config);
   return promise;
@@ -44,5 +49,6 @@ export {
   getProductsInPromotion,
   getUser,
   putUser,
+  getProductsByCategory,
   postProduct,
 };

@@ -28,6 +28,18 @@ export function AddProductPage() {
       Authorization: `Bearer ${token}`,
     },
   };
+  const CATEGORIES = Object.freeze([
+    "Eletronicos",
+    "Audio-e-video",
+    "Moda",
+    "Mercearia",
+    "Livros",
+    "Instrumentos-Musicais",
+    "Promocao",
+    "Saude",
+    "Decoracao",
+    "Brinquedos",
+  ]);
 
   function handleForm(e) {
     setForm({
@@ -55,7 +67,7 @@ export function AddProductPage() {
       if (picture !== "") {
         return true;
       }
-      return false
+      return false;
     });
     const toBeValidated = { ...form, pictures: picturesToSend };
     const { value, error } = newProductSchema.validate(toBeValidated, {
@@ -116,6 +128,12 @@ export function AddProductPage() {
             placeholder="Preço"
             disabled={isLoading}
           />
+          <select name="categories">
+            <option value="">Categoria</option>
+            {CATEGORIES.map((category) => {
+              return <option value={category}>{category}</option>;
+            })}
+          </select>
           <input
             type="text"
             name="picture0"

@@ -52,6 +52,16 @@ function postProduct(data, config) {
   return promise;
 }
 
+function deleteCart(config) {
+  const promise = axios.delete(`${API_ENDPOINT_URL}/cart`,  config);
+  return promise;
+}
+
+function getCart(config) {
+  const promise = axios.get(`${API_ENDPOINT_URL}/cart`,  config);
+  return promise;
+}
+
 export {
   postSignIn,
   postSignUp,
@@ -62,4 +72,6 @@ export {
   getProductsByCategory,
   getProductsById,
   postProduct,
+  getCart,
+  deleteCart,
 };

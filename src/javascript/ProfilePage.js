@@ -1,5 +1,4 @@
-import styled, { keyframes } from "styled-components";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu.js";
 import { ContentStyle } from "../stylesheet/models.js";
@@ -7,14 +6,7 @@ import { getUser, putUser } from "../services/services.js";
 import { Oval } from "react-loader-spinner";
 import { Form } from "../stylesheet/models.js";
 import { changeUserSchema } from "../Schemas/changeUserSchema.js";
-
-function blinkingEffect() {
-  return keyframes`
-      50% {
-        opacity: 0;
-      }
-    `;
-}
+import BannerAddProduct from "./components/shared/BannerAddProduct.js";
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -135,12 +127,7 @@ function ProfilePage() {
                 </button>
               </form>
             </Form>
-
-            <BannerAddProduct>
-              <Link to="/product/new">
-                <AddProduct>{"Venha vender conosco!"}</AddProduct>
-              </Link>
-            </BannerAddProduct>
+            <BannerAddProduct />
           </>
         )}
       </Wrapper>
@@ -180,28 +167,4 @@ const FormsLabel = styled.span`
   color: white;
   margin: 0px 0px 0px 10px;
   width: 80%;
-`;
-
-const BannerAddProduct = styled.div`
-  background-color: #c6ae82;
-  border-radius: 5px;
-  height: 75px;
-  width: 80%;
-  margin-top: 20px;
-  cursor: pointer;
-  animation: ${blinkingEffect} 1.5s linear infinite;
-  a {
-    text-decoration: none;
-  }
-`;
-
-const AddProduct = styled.span`
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  font-family: "Raleway";
-  font-size: 35px;
-  font-weight: 700;
-  color: white;
 `;

@@ -20,7 +20,7 @@ export default function Menu() {
       <div>
         <Selection>
           <select onChange={selectCategory}>
-            <option value="0" defaultValue hidden>
+            <option value="" defaultValue hidden>
               ▲
             </option>
             {CATEGORIES.map((category) => {
@@ -28,7 +28,6 @@ export default function Menu() {
             })}
           </select>
         </Selection>
-
         <Link to="/user">
           <ion-icon name="person"></ion-icon>
         </Link>

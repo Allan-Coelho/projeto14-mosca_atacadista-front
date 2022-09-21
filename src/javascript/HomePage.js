@@ -40,25 +40,36 @@ function HomePage() {
   return (
     <Content>
       <Menu />
-      <EmblaCarousel slides={[slides, mediaByIndex]} />
-      <Selling>
-        {products ? (
-          products.map((product) => {
-            return (
-              <Link
-                to={"/product/" + product.productId}
-                key={product.productId}
-              >
-                <img src={product.url} />
-                <h2>{product.name}</h2>
-                <h3>{product.value}</h3>
-              </Link>
-            );
-          })
+
+      {products.length === 0 ? (
+          <>
+            <p>
+              Nenhum produto a venda.
+            </p>
+          </>
         ) : (
-          <></>
-        )}
-      </Selling>
+        <>
+          <EmblaCarousel slides={[slides, mediaByIndex]} />
+          <Selling>
+            {products ? (
+              products.map((product) => {
+                return (
+                  <Link
+                    to={"/product/" + product.productId}
+                    key={product.productId}
+                  >
+                    <img src={product.url} />
+                    <h2>{product.name}</h2>
+                    <h3>{product.value}</h3>
+                  </Link>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </Selling>
+      </>
+      )}
     </Content>
   );
 }
@@ -71,6 +82,13 @@ const Content = styled(ContentStyle)`
   flex-direction: column;
   .embla {
     width: 100%;
+  }
+
+  p {
+    color: white;
+    margin-top: 45%;
+    font-size: 24px;
+    text-align: center;
   }
 `;
 

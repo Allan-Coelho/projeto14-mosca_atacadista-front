@@ -2,32 +2,28 @@ import styled from "styled-components";
 import { ContentStyle } from "../stylesheet/models.js";
 import Menu from "./components/shared/Menu.js";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { deleteCart, getCart } from '../services/services.js';
 
 function CartPage() {
-  let cartProducts = [
-    {
-      _id: "teste",
-      url: [
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi58uIlj8FdzAtwUxZmvuSsZZ37efS_H0naQ&usqp=CAU",
-      ],
-      promotion: 10,
-      value: 22.5,
-      name: "camisa",
-    },
-    {
-      _id: "teste",
-      url: [
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi58uIlj8FdzAtwUxZmvuSsZZ37efS_H0naQ&usqp=CAU",
-      ],
-      promotion: 0,
-      value: 22.5,
-      name: "camisa",
-    },
-  ];
+  const auth = JSON.parse(localStorage.getItem('auth'));
+  const config = { headers:{'Authorization': 'Bearer '+ auth}};
+  const [ cartProducts, setCartProducts ] = useState([]);
 
   const deleteProduct = (productId) => {
-    console.log(productId);
-  };
+    deleteCart({ headers:{'Authorization': 'Bearer '+ auth}, body: {'productId': productId}}).then(
+      alert('produto deletado do carrinho com sucesso!')
+    ) 
+  }
+
+  useEffect(() => {
+    getCart(config).then(
+        function (response) {
+            if (response) {
+                setCartProducts(response.data);
+            }
+        })
+  }, []);
 
   return (
     <Content>
@@ -70,7 +66,7 @@ function CartPage() {
                     <span
                       onClick={(e) => {
                         e.preventDefault();
-                        console.log(product._id);
+                        deleteProduct(product._id);
                       }}
                     >
                       <ion-icon name="close-outline"></ion-icon>

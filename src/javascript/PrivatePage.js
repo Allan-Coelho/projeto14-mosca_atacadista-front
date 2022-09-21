@@ -20,7 +20,7 @@ export default function PrivatePage({ children }) {
     if (!isAuthenticated) {
       setIsAuthenticated(false);
       console.log("Rota protegida, usuário não autorizado.");
-      navigate("/");
+      navigate("/signin");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -46,7 +46,7 @@ function SignUp() {
       .then((response) => {
         setIsAble(true);
         localStorage.setItem("auth", response.data);
-        navigate("/home");
+        navigate("/");
       })
       .catch((response) => {
         setIsAble(true);

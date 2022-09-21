@@ -45,7 +45,7 @@ function SignIn() {
             console.log(response.data);
             localStorage.clear();
             localStorage.setItem("auth", response.data);
-            navigate("/home");
+            navigate("/");
           }
         })
         .finally(function () {

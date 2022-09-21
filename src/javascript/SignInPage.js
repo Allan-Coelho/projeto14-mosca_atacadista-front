@@ -45,7 +45,7 @@ function SignIn() {
             console.log(response.data);
             localStorage.clear();
             localStorage.setItem("auth", response.data);
-            navigate("/homepage");
+            navigate("/home");
           }
         })
         .finally(function () {
@@ -119,21 +119,6 @@ const Content = styled(ContentStyle)`
     width: 30%;
   }
 `;
-
-/* const Logo = styled(LogoStyle)`
-  font-family: "Lobster";
-  left: 40px;
-
-  img {
-    height: 100px;
-    top: -20px;
-    left: -110px;
-  }
-
-  h1 {
-    font-size: 40px;
-  }
-`; */
 
 const Form = styled.div`
   margin-top: 20px;

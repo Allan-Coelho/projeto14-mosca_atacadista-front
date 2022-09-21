@@ -46,8 +46,11 @@ const Form = styled.div`
   button {
     margin-left: 40%;
     height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
     background-color: #4e6a5e;
     color: white;
@@ -55,7 +58,16 @@ const Form = styled.div`
     cursor: pointer;
     font-size: 20px;
   }
-
+  select {
+    padding: 0 3%;
+    margin: 0 0 10px 6%;
+    width: 86%;
+    height: 58px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: white;
+  }
   input::placeholder {
     color: black;
   }
@@ -130,7 +142,16 @@ const MainInfoStyle = styled.div`
   }
 `;
 
+const FormsLabel = styled.span`
+  font-size: 20px;
+  padding: 0 3%;
+  color: white;
+  margin: 0px 0px 0px 10px;
+  width: 80%;
+`;
+
 export {
+  FormsLabel,
   LogoStyle,
   ContentBoxStyle,
   ContentStyle,

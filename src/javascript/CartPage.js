@@ -3,7 +3,7 @@ import { ContentStyle } from "../stylesheet/models.js";
 import Menu from "./components/shared/Menu.js";
 import { Link } from "react-router-dom";
 
-function Cart() {
+function CartPage() {
   let cartProducts = [
     {
       _id: "teste",
@@ -86,7 +86,7 @@ function Cart() {
   );
 }
 
-export { Cart };
+export { CartPage };
 
 const Content = styled(ContentStyle)`
   display: flex;

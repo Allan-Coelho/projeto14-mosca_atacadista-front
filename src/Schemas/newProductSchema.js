@@ -5,6 +5,7 @@ const newProductSchema = joi.object({
   description: joi.string().min(256).max(1024),
   price: joi.number().min(0.01).multiple(0.01),
   pictures: joi.array().min(3).max(5).items(joi.string().uri()),
+  category: joi.string(),
 });
 
 export { newProductSchema };

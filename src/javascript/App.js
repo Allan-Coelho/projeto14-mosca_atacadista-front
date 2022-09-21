@@ -1,13 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Reset from "../stylesheet/reset.js";
-import PrivatePage from "./PrivatePage.js";
 import { SignIn } from "./SignInPage.js";
 import { HomePage } from "./HomePage.js";
 import { SignUp } from "./SignUpPage.js";
-import { Product } from "./Product.js";
-import { Cart } from "./Cart.js";
+import PrivatePage from "./PrivatePage.js";
+import { ProductPage } from "./ProductPage.js";
+import { CartPage } from "./CartPage.js";
 import { ProfilePage } from "./ProfilePage.js";
 import { AddProductPage } from "./NewProductPage.js";
+import SearchByCategory from "./SearchByCategory.js";
 
 function App() {
   return (
@@ -17,18 +18,21 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/product" element={<Product />} />
+          <Route path="/products">
+            <Route path=":category" element={<SearchByCategory />} />
+          </Route>
+          <Route path="/product" element={<ProductPage />} />
           <Route
             path="/cart"
             element={
               <PrivatePage>
-                <Cart />
+                <CartPage />
               </PrivatePage>
             }
           />
           <Route path="/product/new" element={<AddProductPage />} />
           <Route
-            path="/homepage"
+            path="/home"
             element={
               <PrivatePage>
                 <HomePage />

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Logo from "./Logo.js";
 import { CATEGORIES } from "../../../enums/productEnums.js";
 import { removeAccent } from "../../modules/removeAccent.js";
-import Select from "react-select";
 
 export default function Menu() {
   const navigate = useNavigate();

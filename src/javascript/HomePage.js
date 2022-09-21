@@ -83,6 +83,13 @@ const Content = styled(ContentStyle)`
   .embla {
     width: 100%;
   }
+
+  p {
+    color: white;
+    margin-top: 45%;
+    font-size: 24px;
+    text-align: center;
+  }
 `;
 
 const Selling = styled.div`

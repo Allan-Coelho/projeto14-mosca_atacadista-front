@@ -35,6 +35,9 @@ export default function Menu() {
         <Link to="/user">
           <ion-icon name="person"></ion-icon>
         </Link>
+        <Link to="/cart">
+          <ion-icon name="cart"></ion-icon>
+        </Link>
       </div>
     </Wrapper>
   );

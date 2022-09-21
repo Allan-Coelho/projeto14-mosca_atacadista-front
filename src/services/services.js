@@ -17,8 +17,10 @@ function getProducts(header) {
   return promise;
 }
 
-function getProductsByCategory(header) {
-  const promise = axios.get(`${API_ENDPOINT_URL}/products`, header);
+function getProductsByCategory(category) {
+  const promise = axios.get(
+    `${API_ENDPOINT_URL}/products/category/${category}`
+  );
   return promise;
 }
 

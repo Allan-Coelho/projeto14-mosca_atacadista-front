@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import Menu from "./components/shared/Menu.js";
-import { ContentStyle } from "../stylesheet/models.js";
-import { getUser, putUser } from "../services/services.js";
 import { Oval } from "react-loader-spinner";
-import { Form } from "../stylesheet/models.js";
+import Menu from "./components/shared/Menu.js";
+import { ContentStyle, Form, FormsLabel } from "../stylesheet/models.js";
+import { getUser, putUser } from "../services/services.js";
 import { changeUserSchema } from "../Schemas/changeUserSchema.js";
 import BannerAddProduct from "./components/shared/BannerAddProduct.js";
 
@@ -161,10 +160,3 @@ const ProfilePicture = styled.img`
   background-size: cover;
 `;
 const Content = styled(ContentStyle)``;
-const FormsLabel = styled.span`
-  font-size: 20px;
-  padding: 0 3%;
-  color: white;
-  margin: 0px 0px 0px 10px;
-  width: 80%;
-`;

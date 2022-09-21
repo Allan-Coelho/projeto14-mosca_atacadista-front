@@ -142,7 +142,16 @@ const MainInfoStyle = styled.div`
   }
 `;
 
+const FormsLabel = styled.span`
+  font-size: 20px;
+  padding: 0 3%;
+  color: white;
+  margin: 0px 0px 0px 10px;
+  width: 80%;
+`;
+
 export {
+  FormsLabel,
   LogoStyle,
   ContentBoxStyle,
   ContentStyle,

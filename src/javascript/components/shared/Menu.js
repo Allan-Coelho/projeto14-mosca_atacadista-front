@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import Logo from "./Logo.js";
 import { CATEGORIES } from "../../../enums/productEnums.js";
 import { removeAccent } from "../../modules/removeAccent.js";
+import Select from "react-select";
 
 export default function Menu() {
   const navigate = useNavigate();
   const selectCategory = (event) => {
     const category = event.target.value;
-    navigate("/products/?category=" + category);
+    navigate("/products/" + category);
   };
 
   return (
@@ -23,8 +24,12 @@ export default function Menu() {
             <option value="" defaultValue hidden>
               ▲
             </option>
-            {CATEGORIES.map((category) => {
-              return <option value={removeAccent(category)}>{category}</option>;
+            {CATEGORIES.map((category, index) => {
+              return (
+                <option key={index} value={removeAccent(category)}>
+                  {category}
+                </option>
+              );
             })}
           </select>
         </Selection>

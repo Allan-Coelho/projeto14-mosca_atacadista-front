@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu.js";
 
 function HomePage () {
-    const navigate = useNavigate();
     const auth = localStorage.getItem('auth');
     const config = { headers:{'Authorization': 'Bearer '+ auth}};
     const [ products, setProducts ] = useState([]);

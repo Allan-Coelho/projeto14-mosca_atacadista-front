@@ -7,7 +7,7 @@ import {
 import EmblaCarousel from "./EmblaCarouselProduct.js";
 import Menu from "./components/shared/Menu.js";
 
-function Product() {
+function ProductPage() {
   let SLIDE_COUNT = 6;
   let slides = Array.from(Array(SLIDE_COUNT).keys());
   let media = [
@@ -49,7 +49,7 @@ function Product() {
   );
 }
 
-export { Product };
+export { ProductPage };
 
 const Content = styled(ContentStyle)`
   display: flex;

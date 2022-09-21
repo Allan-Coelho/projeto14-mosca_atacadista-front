@@ -14,7 +14,7 @@ export default function Menu() {
 
   return (
     <Wrapper>
-      <Link to={"/home"}>
+      <Link to={"/"}>
         <Logo />
       </Link>
       <div>

@@ -89,6 +89,7 @@ const Content = styled(ContentStyle)`
     margin-top: 45%;
     font-size: 24px;
     text-align: center;
+    font-family: "Raleway";
   }
 `;
 

@@ -6,71 +6,72 @@ import { getProducts, getProductsInPromotion } from "../services/services.js";
 import { useEffect, useState } from "react";
 import Menu from "./components/shared/Menu.js";
 
-function HomePage () {
-    const auth = localStorage.getItem('auth');
-    const config = { headers:{'Authorization': 'Bearer '+ auth}};
-    const [ products, setProducts ] = useState([]);
-    let SLIDE_COUNT = 6;
-    let slides = Array.from(Array(SLIDE_COUNT).keys());
-    const [ media, setMedia ] = useState([[], [], [], [], [], []])
-    let mediaByIndex = index => media[index % media.length];
-    
-    useEffect(() => {
-        getProducts(config).then(
-            function (response) {
-                if (response) {
-                    setProducts(response.data);
-                }
-            })
-        getProductsInPromotion(config).then(
-            function (response) {
-                if (response.data) {
-                    let arr = [];
-                    response.data.map((promotionProduct) => {
-                        arr.push([promotionProduct.url, promotionProduct.promotion, promotionProduct._id]);
-                    })
-                    setMedia(arr);
-                    mediaByIndex = index => media[index % media.length];
-                }
-            })
-    }, []);
-    
-    return (
-      <Content>
-        <Menu/>
-        <EmblaCarousel slides={[slides, mediaByIndex]} />
-        <Selling>
-          {products ? (
-            products.map((product) => {
-              return (
-                <Link
-                  to={"/product/" + product.productId}
-                  key={product.productId}
-                >
-                  <img src={product.url} />
-                  <h2>{product.name}</h2>
-                  <h3>{product.value}</h3>
-                </Link>
-              );
-            })
-          ) : (
-            <></>
-          )}
-        </Selling>
-      </Content>
-    );
+function HomePage() {
+  const auth = localStorage.getItem("auth");
+  const config = { headers: { Authorization: "Bearer " + auth } };
+  const [products, setProducts] = useState([]);
+  let SLIDE_COUNT = 6;
+  let slides = Array.from(Array(SLIDE_COUNT).keys());
+  const [media, setMedia] = useState([[], [], [], [], [], []]);
+  let mediaByIndex = (index) => media[index % media.length];
+
+  useEffect(() => {
+    getProducts(config).then(function (response) {
+      if (response) {
+        setProducts(response.data);
+      }
+    });
+    getProductsInPromotion(config).then(function (response) {
+      if (response.data) {
+        let arr = [];
+        response.data.map((promotionProduct) => {
+          arr.push([
+            promotionProduct.url,
+            promotionProduct.promotion,
+            promotionProduct._id,
+          ]);
+        });
+        setMedia(arr);
+        mediaByIndex = (index) => media[index % media.length];
+      }
+    });
+  }, []);
+
+  return (
+    <Content>
+      <Menu />
+      <EmblaCarousel slides={[slides, mediaByIndex]} />
+      <Selling>
+        {products ? (
+          products.map((product) => {
+            return (
+              <Link
+                to={"/product/" + product.productId}
+                key={product.productId}
+              >
+                <img src={product.url} />
+                <h2>{product.name}</h2>
+                <h3>{product.value}</h3>
+              </Link>
+            );
+          })
+        ) : (
+          <></>
+        )}
+      </Selling>
+    </Content>
+  );
 }
 
 export { HomePage };
 
 const Content = styled(ContentStyle)`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    .embla {
-        margin-top: 120px;
-        width: 100%
-    }
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .embla {
+    width: 100%;
+  }
 `;
 
 const Selling = styled.div`

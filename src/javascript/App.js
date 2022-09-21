@@ -8,6 +8,7 @@ import { ProductPage } from "./ProductPage.js";
 import { CartPage } from "./CartPage.js";
 import { ProfilePage } from "./ProfilePage.js";
 import { AddProductPage } from "./NewProductPage.js";
+import SearchByCategory from "./SearchByCategory.js";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/products">
+            <Route path=":category" element={<SearchByCategory />} />
+          </Route>
           <Route path="/product" element={<ProductPage />} />
           <Route
             path="/cart"

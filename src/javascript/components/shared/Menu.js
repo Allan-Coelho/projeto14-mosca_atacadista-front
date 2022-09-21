@@ -2,12 +2,15 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Logo from "./Logo.js";
+import { CATEGORIES } from "../../../enums/productEnums.js";
+import { removeAccent } from "../../modules/removeAccent.js";
+import Select from "react-select";
 
 export default function Menu() {
   const navigate = useNavigate();
   const selectCategory = (event) => {
     const category = event.target.value;
-    navigate("/products/?category=" + category);
+    navigate("/products/" + category);
   };
 
   return (
@@ -18,22 +21,18 @@ export default function Menu() {
       <div>
         <Selection>
           <select onChange={selectCategory}>
-            <option value="0" defaultValue hidden>
+            <option value="" defaultValue hidden>
               ▲
             </option>
-            <option value="1">Eletrônicos</option>
-            <option value="2">Áudio e video</option>
-            <option value="3">Moda</option>
-            <option value="4">Mercearia</option>
-            <option value="5">Livros</option>
-            <option value="6">Instrumentos Musicais</option>
-            <option value="7">Promoção</option>
-            <option value="8">Saúde</option>
-            <option value="9">Decoração</option>
-            <option value="10">Brinquedos</option>
+            {CATEGORIES.map((category, index) => {
+              return (
+                <option key={index} value={removeAccent(category)}>
+                  {category}
+                </option>
+              );
+            })}
           </select>
         </Selection>
-
         <Link to="/user">
           <ion-icon name="person"></ion-icon>
         </Link>

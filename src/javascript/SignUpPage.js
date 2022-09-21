@@ -45,7 +45,7 @@ function SignUp() {
     postSignUp(body)
       .then((response) => {
         setIsAble(true);
-        localStorage.setItem("auth", JSON.stringify(response.data));
+        localStorage.setItem("auth", response.data);
         navigate("/home");
       })
       .catch((response) => {

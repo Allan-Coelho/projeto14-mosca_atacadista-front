@@ -12,13 +12,7 @@ const signUpSchema = joi.object({
 
     Joi.string().required()
   ),
-  profilePictureURL: joi
-    .string()
-    .uri()
-    .allow("")
-    .default(
-      "https://www.chocolatebayou.org/wp-content/uploads/No-Image-Person-2048x2048.jpeg"
-    ),
+  profilePictureURL: joi.string().uri().allow(""),
   password: JoiPassword.string()
     .min(8)
     .minOfSpecialCharacters(1)

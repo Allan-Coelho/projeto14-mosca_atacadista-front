@@ -68,7 +68,6 @@ const Content = styled(ContentStyle)`
     align-items: center;
     flex-direction: column;
     .embla {
-        margin-top: 120px;
         width: 100%
     }
 `;

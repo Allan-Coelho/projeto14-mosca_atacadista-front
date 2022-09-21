@@ -20,9 +20,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/products">
-            <Route path=":category" element={<SearchByCategory />} />
-          </Route>
+          <Route path="/products:category" element={<SearchByCategory />} />
           <Route path="/product" element={<ProductPage />} />
           <Route
             path="/cart"
@@ -45,7 +43,7 @@ function App() {
             path="/confirm/:productId"
             element={
               <PrivatePage>
-                <ProfilePage />
+                <Confirm />
               </PrivatePage>
             }
           />

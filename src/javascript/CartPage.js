@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { deleteCart, getCart } from '../services/services.js';
 
 function CartPage() {
-  const auth = JSON.parse(localStorage.getItem('auth'));
+  const auth = localStorage.getItem("auth");
   const config = { headers:{'Authorization': 'Bearer '+ auth}};
   const [ cartProducts, setCartProducts ] = useState([]);
 

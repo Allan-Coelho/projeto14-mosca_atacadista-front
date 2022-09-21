@@ -17,7 +17,8 @@ function App() {
       <Reset />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/signIn" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/products">
             <Route path=":category" element={<SearchByCategory />} />
@@ -32,14 +33,6 @@ function App() {
             }
           />
           <Route path="/product/new" element={<AddProductPage />} />
-          <Route
-            path="/home"
-            element={
-              <PrivatePage>
-                <HomePage />
-              </PrivatePage>
-            }
-          />
           <Route
             path="/user"
             element={

@@ -8,7 +8,7 @@ import Menu from './components/shared/Menu.js';
 
 function Confirm (){
     const { productid } = useParams();
-    const auth = JSON.parse(localStorage.getItem('auth'));
+    const auth = localStorage.getItem("auth");
     const config = { headers: {'Authorization': 'Bearer '+ auth}, params: { 'productId': productid}};
     let SLIDE_COUNT = 6;
     let slides = Array.from(Array(SLIDE_COUNT).keys());

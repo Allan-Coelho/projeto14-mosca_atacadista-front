@@ -96,6 +96,7 @@ const Content = styled(ContentStyle)`
     padding: 0 30%;
     font-family: "Raleway";
     text-align: center;
+    color: white;
   }
 `;
 

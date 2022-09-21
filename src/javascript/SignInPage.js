@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Logo from "./components/shared/Logo.js";
 import { useState } from "react";
-import { ContentStyle, LogoStyle } from "../stylesheet/models.js";
+import { ContentStyle } from "../stylesheet/models.js";
 import { Oval } from "react-loader-spinner";
 import { useNavigate, Link } from "react-router-dom";
 import { postSignIn } from "../services/services.js";

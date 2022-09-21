@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ContentStyle } from "../stylesheet/models.js";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import EmblaCarousel from "./EmblaCarousel.js";
 import { getProducts, getProductsInPromotion } from "../services/services.js";
 import { useEffect, useState } from "react";

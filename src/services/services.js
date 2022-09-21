@@ -17,6 +17,11 @@ function getProducts(header) {
   return promise;
 }
 
+function getProductsById(header) {
+  const promise = axios.get(`${API_ENDPOINT_URL}/product`, header);
+  return promise;
+}
+
 function getProductsByCategory(category) {
   const promise = axios.get(
     `${API_ENDPOINT_URL}/products/category/${category}`
@@ -55,5 +60,6 @@ export {
   getUser,
   putUser,
   getProductsByCategory,
+  getProductsById,
   postProduct,
 };

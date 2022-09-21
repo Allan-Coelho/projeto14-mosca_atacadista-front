@@ -8,6 +8,7 @@ import { ProductPage } from "./ProductPage.js";
 import { CartPage } from "./CartPage.js";
 import { ProfilePage } from "./ProfilePage.js";
 import { AddProductPage } from "./NewProductPage.js";
+import { Confirm } from "./ConfirmPage.js";
 import SearchByCategory from "./SearchByCategory.js";
 
 function App() {
@@ -41,6 +42,14 @@ function App() {
           />
           <Route
             path="/user"
+            element={
+              <PrivatePage>
+                <ProfilePage />
+              </PrivatePage>
+            }
+          />
+           <Route
+            path="/confirm/:productId"
             element={
               <PrivatePage>
                 <ProfilePage />

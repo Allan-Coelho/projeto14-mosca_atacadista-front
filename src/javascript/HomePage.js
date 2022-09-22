@@ -32,7 +32,7 @@ function HomePage() {
           ]);
         });
         setMedia(arr);
-        console.log(arr)
+        console.log(response.data)
         mediaByIndex = (index) => media[index % media.length];
       }
     });

@@ -110,8 +110,9 @@ const ContentBox = styled(ContentBoxStyle)`
       margin-top: 10px;
       font-family: "Raleway";
     }
+  }
 
-    & span button {
+  & :nth-child(4)  button {
             height: 90px;
             width: 100%;
             border: none;
@@ -121,7 +122,6 @@ const ContentBox = styled(ContentBoxStyle)`
             font-family: 'Raleway';
             font-size: 32px;
         }
-  }
 `;
 
 const MainInfo = styled(MainInfoStyle)``;

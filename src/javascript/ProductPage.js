@@ -110,7 +110,7 @@ const ContentBox = styled(ContentBoxStyle)`
       font-family: "Raleway";
     }
 
-    & :nth-child(4) button {
+    & > div > button {
             height: 90px;
             width: 100%;
             border: none;

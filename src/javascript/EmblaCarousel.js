@@ -34,7 +34,6 @@ const EmblaCarousel = (object) => {
       <div className="embla__viewport" ref={viewportRef}>
         <div className="embla__container">
           {slides.map((index) => (
-            console.log(mediaByIndex(index)),
             <div className="embla__slide" key={index}>
               <div
                 className="embla__slide__inner"

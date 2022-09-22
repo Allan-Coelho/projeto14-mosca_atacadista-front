@@ -8,44 +8,68 @@ import EmblaCarousel from "./EmblaCarouselProduct.js";
 import Menu from "./components/shared/Menu.js";
 
 function ProductPage() {
+  const { productid } = useParams();
+  const navigate = useNavigate();
+  const auth = JSON.parse(localStorage.getItem('auth'));
+  const config = { headers: {'Authorization': 'Bearer '+ auth}, params: { 'productId': productid}};
   let SLIDE_COUNT = 6;
   let slides = Array.from(Array(SLIDE_COUNT).keys());
-  let media = [
-    [
-      "https://cdn.awsli.com.br/600x450/44/44273/produto/29988397/20d63df911.jpg",
-      0,
-    ],
-    [
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi58uIlj8FdzAtwUxZmvuSsZZ37efS_H0naQ&usqp=CAU",
-      0,
-    ],
-    [],
-    [],
-    [],
-    [],
-  ];
-  let mediaByIndex = (index) => media[index % media.length];
+  const [ media, setMedia ] = useState([[], [], [], [], [], []])
+  const [ product, setProduct ] = useState([]);
+  let mediaByIndex = index => media[index % media.length];
+
+  const selectCategory = (event) => {
+      const category = event.target.value;
+      navigate('/products/'+category)
+  };
+
+  const addCart = () => {
+      postCart(config).then(
+          (response) => {
+              if (response.data) {
+                  navigate('/cart')
+              }
+          }
+      )
+  };
+
+  useEffect(() => {
+      getProductsById(config).then(
+          (response) => {
+              if (response.data) {
+                  setProduct(response.data);
+                  setMedia([response.data.url, response.data.promotion]);
+                  mediaByIndex = index => media[index % media.length];
+                  SLIDE_COUNT = response.data.length;
+                  slides = Array.from(Array(SLIDE_COUNT).keys());
+              }
+          })
+  }, []);
 
   return (
-    <Content>
-      <Menu />
-      <ContentBox>
-        <EmblaCarousel slides={[slides, mediaByIndex]} />
+      <Content>
+          <Menu />
 
-        <MainInfo>
-          <h2>Camisa</h2>
-          <h3>22,50</h3>
-        </MainInfo>
+          <ContentBox>
+              <EmblaCarousel slides={[slides, mediaByIndex]} />
 
-        <div>
-          <p>Descrição:</p>
-          <p>
-            nao sei o que nao sei o que nao sei o que nao sei o que nao sei o
-            que nao sei o que nao sei o que nao sei o que{" "}
-          </p>
-        </div>
-      </ContentBox>
-    </Content>
+              <MainInfo>
+                  <h2>{product.name}</h2>
+                  <h3>{product.value -((product.value * product.promotion)/100)} </h3>
+              </MainInfo>
+
+              <div>
+                  <p>Descrição:</p>
+                  <p>{product.description}</p>
+              </div>
+
+              <div>
+                  <button onClick={addCart}>
+                      Adicionar ao carrinho
+                  </button>
+              </div>
+          </ContentBox>
+      </Content>
   );
 }
 

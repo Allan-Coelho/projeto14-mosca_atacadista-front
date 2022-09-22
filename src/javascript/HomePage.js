@@ -59,9 +59,9 @@ function HomePage() {
                     to={"/product/" + product._id}
                     key={product._id}
                   >
-                    <img src={product.url} />
+                    <img src={product.url[0]} />
                     <h2>{product.name}</h2>
-                    <h3>{product.value}</h3>
+                    <h3>{product.price}</h3>
                   </Link>
                 );
               })

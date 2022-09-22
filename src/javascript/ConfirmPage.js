@@ -39,7 +39,7 @@ function Confirm (){
 
                 <MainInfo>
                     <h2>{product.name}</h2>
-                    <h3>{product.value -((product.value * product.promotion)/100)} </h3>
+                    <h3>{product.price -((product.price * product.promotion)/100)} </h3>
                 </MainInfo>
 
                 <div>

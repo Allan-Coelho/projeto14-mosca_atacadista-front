@@ -21,11 +21,6 @@ function ProductPage() {
   const [ product, setProduct ] = useState([]);
   let mediaByIndex = index => media[index % media.length];
 
-  const selectCategory = (event) => {
-      const category = event.target.value;
-      navigate('/products/'+category)
-  };
-
   const addCart = () => {
       postCart(config).then(
           (response) => {
@@ -58,7 +53,7 @@ function ProductPage() {
 
               <MainInfo>
                   <h2>{product.name}</h2>
-                  <h3>{product.value -((product.value * product.promotion)/100)} </h3>
+                  <h3>{product.price -((product.price * product.promotion)/100)} </h3>
               </MainInfo>
 
               <div>

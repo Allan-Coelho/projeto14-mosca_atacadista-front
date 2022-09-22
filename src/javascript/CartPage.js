@@ -52,9 +52,9 @@ function CartPage() {
                     <h2>{product.name}</h2>
                     <h3>
                       {product.promotion !== 0
-                        ? product.value -
-                          (product.value * product.promotion) / 100
-                        : product.value}
+                        ? product.price -
+                          (product.price * product.promotion) / 100
+                        : product.price}
                     </h3>
                   </div>
                   <div>

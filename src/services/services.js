@@ -62,6 +62,11 @@ function getCart(config) {
   return promise;
 }
 
+function postCart(config) {
+  const promise = axios.post(`${API_ENDPOINT_URL}/cart`,  config);
+  return promise;
+}
+
 export {
   postSignIn,
   postSignUp,
@@ -74,4 +79,5 @@ export {
   postProduct,
   getCart,
   deleteCart,
+  postCart,
 };

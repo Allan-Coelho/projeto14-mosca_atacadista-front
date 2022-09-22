@@ -6,11 +6,14 @@ import {
 } from "../stylesheet/models.js";
 import EmblaCarousel from "./EmblaCarouselProduct.js";
 import Menu from "./components/shared/Menu.js";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { postCart, getProductsById } from "../services/services.js";
 
 function ProductPage() {
   const { productid } = useParams();
   const navigate = useNavigate();
-  const auth = JSON.parse(localStorage.getItem('auth'));
+  const auth = localStorage.getItem('auth');
   const config = { headers: {'Authorization': 'Bearer '+ auth}, params: { 'productId': productid}};
   let SLIDE_COUNT = 6;
   let slides = Array.from(Array(SLIDE_COUNT).keys());

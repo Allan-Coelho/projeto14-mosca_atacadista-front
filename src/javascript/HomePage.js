@@ -19,13 +19,13 @@ function HomePage() {
     getProducts(config).then(function (response) {
       if (response) {
         setProducts(response.data);
+        console.log(response.data)
       }
     });
     getProductsInPromotion(config).then(function (response) {
       if (response.data) {
         let arr = [];
         response.data.map((promotionProduct) => {
-          console.log(promotionProduct)
           arr.push([
             promotionProduct.pictures,
             promotionProduct.promotion,

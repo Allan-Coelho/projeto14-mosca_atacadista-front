@@ -22,6 +22,7 @@ export function AddProductPage() {
     name: "",
     description: "",
     price: 0,
+    category: "",
   });
   const config = {
     headers: {
@@ -52,6 +53,12 @@ export function AddProductPage() {
       ...pictures,
       [e.target.name]: e.target.value,
     });
+  }
+
+  function selectCategory(event) {
+    const category = event.target.value;
+
+    setForm({ ...form, category: category });
   }
 
   function newProduct(event) {
@@ -93,6 +100,7 @@ export function AddProductPage() {
         name: "",
         description: "",
         price: 0,
+        category: "",
       });
       setIsLoading(false);
     });
@@ -128,10 +136,14 @@ export function AddProductPage() {
             placeholder="Preço"
             disabled={isLoading}
           />
-          <select name="categories">
+          <select name="categories" onChange={selectCategory}>
             <option value="">Categoria</option>
-            {CATEGORIES.map((category) => {
-              return <option value={category}>{category}</option>;
+            {CATEGORIES.map((category, index) => {
+              return (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              );
             })}
           </select>
           <input

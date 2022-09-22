@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_ENDPOINT_URL = process.env.REACT_APP_API_ENDPOINT;
+const API_ENDPOINT_URL = process.env.REACT_APP_API_ENDPOINT_URL;
 
 function postSignIn(body) {
   const promise = axios.post(`${API_ENDPOINT_URL}/signIn`, body);

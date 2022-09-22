@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Menu from "./components/shared/Menu.js";
 import { ContentStyle } from "../stylesheet/models.js";
 import styled from "styled-components";
@@ -10,13 +10,20 @@ import { Oval } from "react-loader-spinner";
 export default function SearchByCategory() {
   const { category } = useParams();
   const [products, setProducts] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getProductsByCategory(category).then(function (response) {
-      if (response) {
-        setProducts(response.data);
-      }
-    });
+    getProductsByCategory(category)
+      .then(function (response) {
+        if (response) {
+          setProducts(response.data);
+        }
+      })
+      .catch(() => {
+        alert("Ocorreu um erro ao buscar essa categoria");
+        setProducts(null);
+        navigate("/")
+      });
   }, [category]);
 
   return (

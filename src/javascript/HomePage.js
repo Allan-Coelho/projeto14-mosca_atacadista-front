@@ -114,6 +114,10 @@ const Selling = styled.div`
       border-radius: 15px 15px 0 0;
       width: 100%;
       height: 70%;
+      ${(props) => {
+        return `background: url(${props.picture}) center center no-repeat;`;
+        }}
+      background-size: cover;
     }
     h2 {
       margin-left: 10px;

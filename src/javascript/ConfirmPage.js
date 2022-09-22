@@ -89,6 +89,10 @@ const ContentBox = styled(ContentBoxStyle)`
 
     .embla__slide__img {
         position: absolute;
+        ${(props) => {
+        return `background: url(${props.picture}) center center no-repeat;`;
+        }}
+        background-size: cover;
     }
 
     &  > div {

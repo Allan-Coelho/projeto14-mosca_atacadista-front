@@ -131,6 +131,10 @@ const SelectionLong = styled.div`
         border-radius: 15px 0 0 15px;
         height: 100%;
         width: 100%;
+        ${(props) => {
+        return `background: url(${props.picture}) center center no-repeat;`;
+        }}
+        background-size: cover;
       }
 
       .promotion {

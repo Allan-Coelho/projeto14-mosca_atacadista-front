@@ -94,16 +94,28 @@ export function AddProductPage() {
     }
 
     setIsLoading(true);
-    postProduct(value, config).then(() => {
-      alert("Produto criado com sucesso!");
-      setForm({
-        name: "",
-        description: "",
-        price: 0,
-        category: "",
+    postProduct(value, config)
+      .then(() => {
+        alert("Produto criado com sucesso!");
+        setForm({
+          name: "",
+          description: "",
+          price: "",
+          category: "",
+        });
+        setPictures({
+          picture0: "",
+          picture1: "",
+          picture2: "",
+          picture3: "",
+          picture4: "",
+        });
+        setIsLoading(false);
+      })
+      .catch(() => {
+        alert("Ocorreu um erro ao registrar o produto");
+        setIsLoading(false);
       });
-      setIsLoading(false);
-    });
   }
 
   return (

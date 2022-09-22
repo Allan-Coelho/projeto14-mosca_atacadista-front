@@ -7,7 +7,7 @@ import {
 import EmblaCarousel from "./EmblaCarouselProduct.js";
 import Menu from "./components/shared/Menu.js";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postCart, getProductsById } from "../services/services.js";
 
 function ProductPage() {

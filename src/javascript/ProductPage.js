@@ -62,11 +62,11 @@ function ProductPage() {
                   <p>{product.description}</p>
               </div>
 
-              <div>
+              <span>
                   <button onClick={addCart}>
                       Adicionar ao carrinho
                   </button>
-              </div>
+              </span>
           </ContentBox>
       </Content>
   );
@@ -111,7 +111,7 @@ const ContentBox = styled(ContentBoxStyle)`
       font-family: "Raleway";
     }
 
-    & > div > button {
+    & span button {
             height: 90px;
             width: 100%;
             border: none;

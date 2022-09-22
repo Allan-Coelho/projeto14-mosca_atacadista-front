@@ -26,13 +26,12 @@ function HomePage() {
         let arr = [];
         response.data.map((promotionProduct) => {
           arr.push([
-            promotionProduct.url,
+            promotionProduct.pictures,
             promotionProduct.promotion,
             promotionProduct._id,
           ]);
         });
         setMedia(arr);
-        console.log(response.data)
         mediaByIndex = (index) => media[index % media.length];
       }
     });
@@ -59,7 +58,7 @@ function HomePage() {
                     to={"/product/" + product._id}
                     key={product._id}
                   >
-                    <img src={product.url[0]} />
+                    <img src={product.pictures[0]} />
                     <h2>{product.name}</h2>
                     <h3>{product.price}</h3>
                   </Link>

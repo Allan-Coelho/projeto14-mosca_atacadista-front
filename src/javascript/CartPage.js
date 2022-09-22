@@ -41,7 +41,7 @@ function CartPage() {
               <div key={product._id}>
                 <Link to={"/product/" + product._id}>
                   <div>
-                    <img src={product.url[0]} />
+                    <img src={product.pictures[0]} />
                     {product.promotion !== 0 ? (
                       <div className="promotion">{product.promotion + "%"}</div>
                     ) : (

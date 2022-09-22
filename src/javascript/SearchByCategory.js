@@ -51,7 +51,7 @@ export default function SearchByCategory() {
                   to={"/product/" + product._id}
                   key={product._id}
                 >
-                  <img alt="product" src={product.url} />
+                  <img alt="product" src={product.pictures[0]} />
                   <h2>{product.name}</h2>
                   <h3>{product.price}</h3>
                 </Link>

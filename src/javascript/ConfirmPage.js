@@ -21,8 +21,7 @@ function Confirm (){
             (response) => {
                 if (response.data) {
                     setProduct(response.data);
-                    console.log(response.data)
-                    setMedia([response.data.url, response.data.promotion]);
+                    setMedia([response.data.pictures, response.data.promotion]);
                     mediaByIndex = index => media[index % media.length];
                     SLIDE_COUNT = response.data.length;
                     slides = Array.from(Array(SLIDE_COUNT).keys());

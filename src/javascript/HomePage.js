@@ -26,7 +26,7 @@ function HomePage() {
         let arr = [];
         response.data.map((promotionProduct) => {
           arr.push([
-            promotionProduct.url[0],
+            promotionProduct.url,
             promotionProduct.promotion,
             promotionProduct._id,
           ]);

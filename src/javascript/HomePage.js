@@ -26,12 +26,13 @@ function HomePage() {
         let arr = [];
         response.data.map((promotionProduct) => {
           arr.push([
-            promotionProduct.url,
+            promotionProduct.url[0],
             promotionProduct.promotion,
             promotionProduct._id,
           ]);
         });
         setMedia(arr);
+        console.log(arr)
         mediaByIndex = (index) => media[index % media.length];
       }
     });
@@ -53,7 +54,6 @@ function HomePage() {
           <Selling>
             {products ? (
               products.map((product) => {
-                console.log(product)
                 return (
                   <Link
                     to={"/product/" + product._id}

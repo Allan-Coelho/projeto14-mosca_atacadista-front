@@ -53,10 +53,11 @@ function HomePage() {
           <Selling>
             {products ? (
               products.map((product) => {
+                console.log(product)
                 return (
                   <Link
-                    to={"/product/" + product.productId}
-                    key={product.productId}
+                    to={"/product/" + product._id}
+                    key={product._id}
                   >
                     <img src={product.url} />
                     <h2>{product.name}</h2>

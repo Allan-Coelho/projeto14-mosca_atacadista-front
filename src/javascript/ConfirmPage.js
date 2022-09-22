@@ -21,8 +21,7 @@ function Confirm (){
             (response) => {
                 if (response.data) {
                     setProduct(response.data);
-                    console.log(response.data)
-                    setMedia([response.data.url, response.data.promotion]);
+                    setMedia([response.data.pictures, response.data.promotion]);
                     mediaByIndex = index => media[index % media.length];
                     SLIDE_COUNT = response.data.length;
                     slides = Array.from(Array(SLIDE_COUNT).keys());
@@ -39,7 +38,7 @@ function Confirm (){
 
                 <MainInfo>
                     <h2>{product.name}</h2>
-                    <h3>{product.value -((product.value * product.promotion)/100)} </h3>
+                    <h3>{product.price -((product.price * product.promotion)/100)} </h3>
                 </MainInfo>
 
                 <div>
@@ -90,6 +89,10 @@ const ContentBox = styled(ContentBoxStyle)`
 
     .embla__slide__img {
         position: absolute;
+        ${(props) => {
+        return `background: url(${props.picture}) center center no-repeat;`;
+        }}
+        background-size: cover;
     }
 
     &  > div {

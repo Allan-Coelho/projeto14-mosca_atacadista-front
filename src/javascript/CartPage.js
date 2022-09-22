@@ -41,7 +41,7 @@ function CartPage() {
               <div key={product._id}>
                 <Link to={"/product/" + product._id}>
                   <div>
-                    <img src={product.url[0]} />
+                    <img src={product.pictures[0]} />
                     {product.promotion !== 0 ? (
                       <div className="promotion">{product.promotion + "%"}</div>
                     ) : (
@@ -52,9 +52,9 @@ function CartPage() {
                     <h2>{product.name}</h2>
                     <h3>
                       {product.promotion !== 0
-                        ? product.value -
-                          (product.value * product.promotion) / 100
-                        : product.value}
+                        ? product.price -
+                          (product.price * product.promotion) / 100
+                        : product.price}
                     </h3>
                   </div>
                   <div>
@@ -131,6 +131,10 @@ const SelectionLong = styled.div`
         border-radius: 15px 0 0 15px;
         height: 100%;
         width: 100%;
+        ${(props) => {
+        return `background: url(${props.picture}) center center no-repeat;`;
+        }}
+        background-size: cover;
       }
 
       .promotion {

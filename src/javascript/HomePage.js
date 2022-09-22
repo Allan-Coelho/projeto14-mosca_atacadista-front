@@ -26,7 +26,7 @@ function HomePage() {
         let arr = [];
         response.data.map((promotionProduct) => {
           arr.push([
-            promotionProduct.url,
+            promotionProduct.pictures,
             promotionProduct.promotion,
             promotionProduct._id,
           ]);
@@ -55,12 +55,12 @@ function HomePage() {
               products.map((product) => {
                 return (
                   <Link
-                    to={"/product/" + product.productId}
-                    key={product.productId}
+                    to={"/product/" + product._id}
+                    key={product._id}
                   >
-                    <img src={product.url} />
+                    <img src={product.pictures[0]} />
                     <h2>{product.name}</h2>
-                    <h3>{product.value}</h3>
+                    <h3>{product.price}</h3>
                   </Link>
                 );
               })
@@ -114,6 +114,10 @@ const Selling = styled.div`
       border-radius: 15px 15px 0 0;
       width: 100%;
       height: 70%;
+      ${(props) => {
+        return `background: url(${props.picture}) center center no-repeat;`;
+        }}
+      background-size: cover;
     }
     h2 {
       margin-left: 10px;

@@ -21,11 +21,6 @@ function ProductPage() {
   const [ product, setProduct ] = useState([]);
   let mediaByIndex = index => media[index % media.length];
 
-  const selectCategory = (event) => {
-      const category = event.target.value;
-      navigate('/products/'+category)
-  };
-
   const addCart = () => {
       postCart(config).then(
           (response) => {
@@ -41,7 +36,7 @@ function ProductPage() {
           (response) => {
               if (response.data) {
                   setProduct(response.data);
-                  setMedia([response.data.url, response.data.promotion]);
+                  setMedia([response.data.pictures, response.data.promotion]);
                   mediaByIndex = index => media[index % media.length];
                   SLIDE_COUNT = response.data.length;
                   slides = Array.from(Array(SLIDE_COUNT).keys());
@@ -53,12 +48,12 @@ function ProductPage() {
       <Content>
           <Menu />
 
-          <ContentBox>
+         <ContentBox>
               <EmblaCarousel slides={[slides, mediaByIndex]} />
 
               <MainInfo>
                   <h2>{product.name}</h2>
-                  <h3>{product.value -((product.value * product.promotion)/100)} </h3>
+                  <h3>{product.price -((product.price * product.promotion)/100)} </h3>
               </MainInfo>
 
               <div>
@@ -101,6 +96,10 @@ const ContentBox = styled(ContentBoxStyle)`
 
   .embla__slide__img {
     position: absolute;
+    ${(props) => {
+      return `background: url(${props.picture}) center center no-repeat;`;
+    }}
+    background-size: cover;
   }
 
   & > div {
@@ -111,6 +110,17 @@ const ContentBox = styled(ContentBoxStyle)`
       font-family: "Raleway";
     }
   }
+
+  & :nth-child(4)  button {
+            height: 90px;
+            width: 100%;
+            border: none;
+            border-radius: 15px;
+            background-color:  #6a8e7f;
+            color: white;
+            font-family: 'Raleway';
+            font-size: 32px;
+        }
 `;
 
 const MainInfo = styled(MainInfoStyle)``;

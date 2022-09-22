@@ -48,12 +48,12 @@ export default function SearchByCategory() {
             return (
               <>
                 <Link
-                  to={"/product/" + product.productId}
-                  key={product.productId}
+                  to={"/product/" + product._id}
+                  key={product._id}
                 >
-                  <img alt="product" src={product.url} />
+                  <img alt="product" src={product.pictures[0]} />
                   <h2>{product.name}</h2>
-                  <h3>{product.value}</h3>
+                  <h3>{product.price}</h3>
                 </Link>
               </>
             );
@@ -78,6 +78,8 @@ const Content = styled(ContentStyle)`
 const Selling = styled.div`
   display: table;
   margin-top: 20px;
+  width: 90%;
+
   a {
     float: left;
     text-decoration: none;

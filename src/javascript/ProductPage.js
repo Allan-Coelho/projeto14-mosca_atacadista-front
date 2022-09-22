@@ -109,6 +109,17 @@ const ContentBox = styled(ContentBoxStyle)`
       margin-top: 10px;
       font-family: "Raleway";
     }
+
+    button {
+            height: 90px;
+            width: 100%;
+            border: none;
+            border-radius: 15px;
+            background-color:  #6a8e7f;
+            color: white;
+            font-family: 'Raleway';
+            font-size: 32px;
+        }
   }
 `;
 

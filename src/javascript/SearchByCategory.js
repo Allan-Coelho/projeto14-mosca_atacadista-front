@@ -78,6 +78,8 @@ const Content = styled(ContentStyle)`
 const Selling = styled.div`
   display: table;
   margin-top: 20px;
+  width: 90%;
+
   a {
     float: left;
     text-decoration: none;

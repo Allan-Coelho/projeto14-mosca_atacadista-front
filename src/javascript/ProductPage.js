@@ -12,6 +12,7 @@ import { postCart, getProductsById } from "../services/services.js";
 
 function ProductPage() {
   const { productid } = useParams();
+  console.log(productid)
   const navigate = useNavigate();
   const auth = localStorage.getItem('auth');
   const config = { headers: {'Authorization': 'Bearer '+ auth}, params: { 'productId': productid}};

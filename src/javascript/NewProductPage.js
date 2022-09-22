@@ -21,8 +21,9 @@ export function AddProductPage() {
   const [form, setForm] = useState({
     name: "",
     description: "",
-    price: 0,
+    price: "",
     category: "",
+    promotion: "",
   });
   const config = {
     headers: {
@@ -81,6 +82,10 @@ export function AddProductPage() {
       abortEarly: false,
     });
 
+    if (value.category !== "Promocao") {
+      value.promotion = 0;
+    }
+
     if (picturesToSend.length < MIN_PRODUCT_PICTURES) {
       alert(
         `Você precisa adicionar, ao menos, ${MIN_PRODUCT_PICTURES} fotos do produto`
@@ -102,6 +107,7 @@ export function AddProductPage() {
           description: "",
           price: "",
           category: "",
+          promotion: "",
         });
         setPictures({
           picture0: "",
@@ -143,6 +149,7 @@ export function AddProductPage() {
           <input
             type="number"
             name="price"
+            defaultValue={""}
             value={form.price}
             onChange={handleForm}
             placeholder="Preço"
@@ -158,6 +165,15 @@ export function AddProductPage() {
               );
             })}
           </select>
+          <input
+            type="number"
+            name="promotion"
+            defaultValue={""}
+            value={form.promotion}
+            onChange={handleForm}
+            placeholder="Desconto promocional (%)"
+            disabled={isLoading}
+          />
           <input
             type="text"
             name="picture0"

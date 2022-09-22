@@ -62,11 +62,11 @@ function ProductPage() {
                   <p>{product.description}</p>
               </div>
 
-              <span>
+              <div>
                   <button onClick={addCart}>
                       Adicionar ao carrinho
                   </button>
-              </span>
+              </div>
           </ContentBox>
       </Content>
   );
